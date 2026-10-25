@@ -1,4 +1,5 @@
-name: Build Android APK
+
+name: Build Ritmo Android APK
 
 on:
   push:
@@ -20,7 +21,7 @@ concurrency:
 
 jobs:
   build-apk:
-    name: Build Android Debug APK
+    name: Build and Validate Ritmo APK
     runs-on: ubuntu-latest
 
     steps:
@@ -31,10 +32,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Type check and regression tests
+        run: npm run lint && npm test
 
       - name: Build Web Application
         run: npm run build
@@ -45,10 +49,8 @@ jobs:
       - name: Setup Java JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '21'
-      - name: Type check and regression tests
-        run: npm run lint && npm test
 
       - name: Setup Gradle Cache
         uses: gradle/actions/setup-gradle@v4
@@ -56,43 +58,99 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          # The legacy "tools" package is no longer available.
           packages: 'platform-tools'
 
-      - name: Install Android SDK 36
+      - name: Install Android SDK 36 and Build Tools
         run: sdkmanager "platforms;android-36" "build-tools;35.0.0" "platform-tools"
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x android/gradlew
-
-      - name: Build Android Debug APK
-        working-directory: android
-        run: ./gradlew test assembleDebug --stacktrace
-
-      - name: Validate and Prepare APK Artifact
+      - name: Prepare private release signing key
+        if: github.event_name != 'pull_request'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.RITMO_KEYSTORE_BASE64 }}
+        shell: bash
         run: |
-          APK_SOURCE="android/app/build/outputs/apk/debug/app-debug.apk"
-          APK_DEST="android/app/build/outputs/apk/debug/ritmo-1.1.6-debug.apk"
+          set -euo pipefail
 
-          if [ ! -f "$APK_SOURCE" ]; then
-            echo "::error::Build succeeded but output APK not found at $APK_SOURCE"
-            echo "Searching for any generated .apk files in android/app/build/:"
-            find android/app/build -name "*.apk" || true
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::RITMO_KEYSTORE_BASE64 secret is missing."
             exit 1
           fi
 
-          cp "$APK_SOURCE" "$APK_DEST"
+          KEYSTORE_FILE="$RUNNER_TEMP/ritmo-release.jks"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_FILE"
+          test -s "$KEYSTORE_FILE"
+          chmod 600 "$KEYSTORE_FILE"
+          echo "RITMO_RELEASE_STORE_FILE=$KEYSTORE_FILE" >> "$GITHUB_ENV"
 
-          echo "=========================================="
-          echo "APK generated successfully:"
-          ls -lh "$APK_DEST"
-          echo "SHA256: $(sha256sum "$APK_DEST" | awk '{print $1}')"
-          echo "=========================================="
+      - name: Build Debug APK for pull requests
+        if: github.event_name == 'pull_request'
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew test assembleDebug --stacktrace
 
-      - name: Upload Ritmo APK Artifact
+      - name: Build signed Release APK
+        if: github.event_name != 'pull_request'
+        working-directory: android
+        env:
+          RITMO_RELEASE_STORE_PASSWORD: ${{ secrets.RITMO_STORE_PASSWORD }}
+          RITMO_RELEASE_KEY_ALIAS: ${{ secrets.RITMO_KEY_ALIAS }}
+          RITMO_RELEASE_KEY_PASSWORD: ${{ secrets.RITMO_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -n "$RITMO_RELEASE_STORE_FILE"
+          test -n "$RITMO_RELEASE_STORE_PASSWORD"
+          test -n "$RITMO_RELEASE_KEY_ALIAS"
+          test -n "$RITMO_RELEASE_KEY_PASSWORD"
+
+          chmod +x gradlew
+          ./gradlew test assembleRelease --stacktrace
+
+      - name: Verify Release APK signature
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK="android/app/build/outputs/apk/release/app-release.apk"
+          APKSIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+
+          if [ ! -f "$APK" ]; then
+            echo "::error::Release APK not found: $APK"
+            find android/app/build/outputs -name '*.apk' || true
+            exit 1
+          fi
+
+          "$APKSIGNER" verify --verbose "$APK"
+          sha256sum "$APK"
+          cp "$APK" android/app/build/outputs/apk/release/ritmo-1.1.6-release.apk
+
+      - name: Prepare Debug APK
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          cp android/app/build/outputs/apk/debug/app-debug.apk artifacts/ritmo-debug.apk
+
+      - name: Upload Debug APK
+        if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: ritmo-android-apk
-          path: android/app/build/outputs/apk/debug/ritmo-1.1.6-debug.apk
+          name: ritmo-debug-apk
+          path: artifacts/ritmo-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload signed Release APK
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ritmo-1.1.6-release-apk
+          path: android/app/build/outputs/apk/release/ritmo-1.1.6-release.apk
           if-no-files-found: error
           retention-days: 30
+
+      - name: Remove temporary signing key
+        if: always() && runner.os == 'Linux'
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/ritmo-release.jks"

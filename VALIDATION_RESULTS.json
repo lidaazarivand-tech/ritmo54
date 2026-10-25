@@ -1,0 +1,62 @@
+{
+  "finalStatus": "NOT READY",
+  "productionBuildVerified": false,
+  "androidDeviceVerified": false,
+  "scope": "Playback modes, real audio queue, three player skins, player responsiveness, speed UI, reversible file deletion and retention",
+  "nodeTests": {
+    "pureSourceTests": { "passed": 15, "failed": 0 },
+    "backupLogicTestsWithCapacitorSubstituted": { "passed": 5, "failed": 0 },
+    "note": "The seven pre-existing settings tests verify legacy exclusions and application theme storage, not Android file deletion."
+  },
+  "browserTests": {
+    "passed": 114,
+    "failed": 0,
+    "layoutCases": 36,
+    "popoverCases": 36,
+    "sizes": ["320x568", "360x640", "390x844", "412x915", "480x800", "360x780"],
+    "skins": ["cassette", "vinyl", "radio"],
+    "states": ["normal", "expanded"],
+    "direction": "RTL",
+    "layoutResult": "No horizontal document/player overflow, visible element outside viewport, or overlapping control buttons in the tested fixture.",
+    "environment": "Chromium via Playwright 1.58.2; React 18.2.0; Tailwind 3.4.18 utility fixture; actual application and player source, mocked Capacitor bridge.",
+    "limitations": "NOT a production React 19/Tailwind 4/Vite build, Android WebView test, or actual storage/permission/background playback test."
+  },
+  "sourceChecks": {
+    "typescriptSyntaxFiles": 32,
+    "syntaxErrors": 0,
+    "activeAppTypecheck": "Passed with TypeScript 5.6.3, installed React types and substituted Capacitor declarations. NOT the pinned project toolchain or npm run lint.",
+    "packageRootLockAlignment": true,
+    "newDependencies": 0,
+    "deletedSourceFiles": 0
+  },
+  "unchangedConfiguration": [
+    "package.json",
+    "package-lock.json",
+    "capacitor.config.ts",
+    "vite.config.ts",
+    "tsconfig.json",
+    ".github/workflows/android-apk.yml",
+    ".gitignore",
+    "android/build.gradle",
+    "android/app/build.gradle",
+    "android/app/capacitor.build.gradle",
+    "android/gradle/wrapper/gradle-wrapper.jar",
+    "android/gradle/wrapper/gradle-wrapper.properties",
+    "android/app/src/main/AndroidManifest.xml"
+  ],
+  "notRun": [
+    "npm ci using the project's actual locked dependencies",
+    "npm run lint using the project's pinned compiler",
+    "npm run build using the project's Vite/Tailwind/React versions",
+    "npx cap sync android",
+    "Gradle assembleDebug and Android Java compilation",
+    "GitHub Actions execution",
+    "Real Android MediaStore delete consent on API 24-28, 29, 30+",
+    "Real restore, destination collision, missing file, storage quota and permission failure",
+    "Real retention expiration and private-file permanent deletion",
+    "Android process death/restart at storage transaction boundaries",
+    "Background playback, notification, MediaSession and audio service regression",
+    "Real Android SAF settings backup export/import"
+  ],
+  "notRunReason": "NOT RUN: محیط اجرا امکان تست واقعی را نداشت. The sandbox has no internet access, the locked dependencies and Android SDK/Gradle distribution are absent, and available Java is 17 while the unchanged Android project targets Java 21."
+}

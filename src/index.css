@@ -1,0 +1,676 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    direction: rtl;
+    text-align: right;
+  }
+
+  html, body, button, input, textarea, select {
+    font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+  }
+
+  body {
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, strong, b {
+    font-weight: 600;
+  }
+
+  /* Custom audio range slider styling */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.25);
+    box-shadow: 0 0 14px var(--accent-glow, rgba(212, 175, 55, 0.8));
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+}
+
+/* Vinyl rotation animation */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tabular nums font */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+}
+
+/*
+ * Ritmo Premium Dark Blue.
+ * Compatibility styling for the active RitmoAppClean utility classes:
+ * no JSX, layout, typography, state, or event-handler changes are needed.
+ * Keep these rules outside Tailwind layers so they override existing utilities.
+ */
+:root {
+  /* sRGB fallback for Android WebViews that do not yet support OKLCH. */
+  --ritmo-background: #080B11;
+  --ritmo-background-secondary: #0D121A;
+  --ritmo-surface: #141A23;
+  --ritmo-elevated: #1B2430;
+  --ritmo-border: #273442;
+  --ritmo-divider: #1E2935;
+  --ritmo-blue: #398FCB;
+  --ritmo-soft: #56A9DF;
+  --ritmo-text: #F1F4F7;
+  --ritmo-on-primary: var(--ritmo-text);
+  --ritmo-secondary: #A0AAB6;
+  --ritmo-muted: #84919F;
+  --ritmo-disabled: #687482;
+  --ritmo-selected: #17334A;
+  --ritmo-favorite: #DC8DA5;
+  --ritmo-danger: #E2A4B3;
+  --ritmo-danger-surface: #261923;
+  --ritmo-edge: #344352;
+  --ritmo-button-bottom: #307CAF;
+  --ritmo-shadow-small: 0 3px 8px rgb(4 8 14 / 24%);
+  --ritmo-shadow-floating: 0 10px 28px rgb(4 8 14 / 36%);
+  --ritmo-edge-highlight: inset 0 1px 0 var(--ritmo-edge);
+  --ritmo-radius-sm: 10px;
+  --ritmo-radius-md: 14px;
+  --ritmo-radius-lg: 18px;
+  --ritmo-space-1: 6px;
+  --ritmo-space-2: 10px;
+  --ritmo-space-3: 14px;
+  --ritmo-space-4: 18px;
+  --ritmo-focus: 0 0 0 3px rgb(86 169 223 / .22);
+  --ritmo-shell-glow: radial-gradient(ellipse 58% 48% at 50% 38%, rgb(55 143 203 / .16), transparent 72%), linear-gradient(155deg, var(--ritmo-surface) 0%, var(--ritmo-background) 58%, var(--ritmo-background) 100%);
+}
+
+@supports (color: oklch(50% 0.1 240)) {
+:root {
+  --ritmo-background: oklch(14.922% 0.01403 263.233); /* #080B11 */
+  --ritmo-background-secondary: oklch(18.101% 0.01835 259.681); /* #0D121A */
+  --ritmo-surface: oklch(21.603% 0.01999 258.345); /* #141A23 */
+  --ritmo-elevated: oklch(25.735% 0.02615 255.758); /* #1B2430 */
+  --ritmo-border: oklch(31.953% 0.03062 250.667); /* #273442 */
+  --ritmo-divider: oklch(27.622% 0.02710 251.005); /* #1E2935 */
+  --ritmo-blue: oklch(62.527% 0.12194 242.851); /* #398FCB */
+  --ritmo-soft: oklch(70.500% 0.11322 239.629); /* #56A9DF */
+  --ritmo-text: oklch(96.573% 0.00514 247.877); /* #F1F4F7 */
+  --ritmo-secondary: oklch(73.389% 0.02071 252.927); /* #A0AAB6 */
+  --ritmo-muted: oklch(65.086% 0.02578 250.196); /* #84919F */
+  --ritmo-disabled: oklch(55.391% 0.02615 252.323); /* #687482 */
+  --ritmo-selected: oklch(31.103% 0.05371 245.523); /* #17334A */
+  --ritmo-favorite: oklch(73.067% 0.10007 0.183); /* #DC8DA5 */
+  --ritmo-danger: oklch(78.144% 0.07559 3.015); /* #E2A4B3 */
+  --ritmo-danger-surface: oklch(23.413% 0.02722 334.904); /* #261923 */
+  --ritmo-edge: oklch(37.608% 0.03232 248.699); /* #344352 */
+  --ritmo-button-bottom: oklch(56.292% 0.10815 241.877); /* #307CAF */
+}
+}
+
+/* Text on the existing Dark Blue action gradient; other palettes are unchanged. */
+:root:not([data-ritmo-theme]),
+:root[data-ritmo-theme="obsidian"] {
+  --ritmo-on-primary: #010409;
+}
+
+/* Only tokens vary. The default obsidian palette above remains unchanged. */
+:root[data-ritmo-theme="cyber"] {
+  --ritmo-background: #0A1020;
+  --ritmo-background-secondary: #101A2E;
+  --ritmo-surface: #152139;
+  --ritmo-elevated: #1D2D49;
+  --ritmo-border: #344765;
+  --ritmo-divider: #293B58;
+  --ritmo-blue: #579CDD;
+  --ritmo-soft: #8CCBFF;
+  --ritmo-selected: #213E61;
+  --ritmo-edge: #455E80;
+  --ritmo-button-bottom: #376FA6;
+  --ritmo-shell-glow: radial-gradient(ellipse 58% 48% at 50% 38%, rgb(87 156 221 / .22), transparent 72%), linear-gradient(155deg, #152139 0%, #0A1020 58%, #050914 100%);
+}
+:root[data-ritmo-theme="emerald"] {
+  --ritmo-background: #091410;
+  --ritmo-background-secondary: #0E1D18;
+  --ritmo-surface: #142720;
+  --ritmo-elevated: #1D342C;
+  --ritmo-border: #355247;
+  --ritmo-divider: #284136;
+  --ritmo-blue: #3EA892;
+  --ritmo-soft: #73D5C2;
+  --ritmo-selected: #1C453A;
+  --ritmo-edge: #43685A;
+  --ritmo-button-bottom: #277968;
+  --ritmo-shell-glow: radial-gradient(ellipse 58% 48% at 50% 38%, rgb(62 168 146 / .18), transparent 72%), linear-gradient(155deg, #142720 0%, #091410 58%, #050b08 100%);
+}
+
+/* Paint only: all dimensions, spacing, fonts, and rounded shapes stay intact. */
+html,
+body {
+  background-color: var(--ritmo-background);
+}
+
+#root > .min-h-screen[dir="rtl"] {
+  color-scheme: dark;
+  color: var(--ritmo-text);
+  background-color: var(--ritmo-background);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-[#0a0c13]"] {
+  background-color: var(--ritmo-background);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) header[class~="bg-[#0a0c13]"] {
+  background-color: var(--ritmo-background-secondary);
+  background-image: linear-gradient(180deg, var(--ritmo-surface), var(--ritmo-background-secondary));
+  box-shadow: 0 3px 12px rgb(4 8 14 / 18%);
+}
+
+/* Full player, queue, settings, actions, file details, and all pickers. */
+:where(#root > .min-h-screen[dir="rtl"]) .fixed[class~="bg-[#0a0c13]"] {
+  background-image: linear-gradient(165deg, var(--ritmo-surface), var(--ritmo-background) 46%);
+}
+
+/* Sort/speed menus are a step above the base surface, without a glow. */
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-[#171923]"] {
+  background-color: var(--ritmo-elevated);
+  background-image: linear-gradient(160deg, var(--ritmo-elevated), var(--ritmo-surface));
+  box-shadow: var(--ritmo-edge-highlight), var(--ritmo-shadow-floating);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-[#11131c]"] {
+  background-color: var(--ritmo-elevated);
+  background-image: linear-gradient(180deg, var(--ritmo-elevated), var(--ritmo-surface));
+  box-shadow: 0 -6px 22px rgb(4 8 14 / 32%);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-white/10"] {
+  background-color: var(--ritmo-elevated);
+}
+
+/* Existing playlist cards and song-action surfaces keep their original shapes. */
+:where(#root > .min-h-screen[dir="rtl"]) button[class~="bg-white/10"],
+:where(#root > .min-h-screen[dir="rtl"]) button[class~="bg-white/5"] {
+  background-color: var(--ritmo-surface);
+  background-image: linear-gradient(150deg, var(--ritmo-elevated), var(--ritmo-surface) 70%);
+  box-shadow: var(--ritmo-edge-highlight), inset 0 0 0 1px var(--ritmo-divider), var(--ritmo-shadow-small);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[class~="bg-white/5"] {
+  background-color: var(--ritmo-surface);
+  box-shadow: inset 0 0 0 1px var(--ritmo-border);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="border-white/10"] {
+  border-color: var(--ritmo-border);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="border-white/[0.06]"] {
+  border-color: var(--ritmo-divider);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .text-slate-100 {
+  color: var(--ritmo-text);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .text-slate-400 {
+  color: var(--ritmo-secondary);
+}
+
+/* Durations and empty states need readable contrast, not disabled contrast. */
+:where(#root > .min-h-screen[dir="rtl"]) .text-slate-500 {
+  color: var(--ritmo-muted);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .text-amber-400 {
+  color: var(--ritmo-soft);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .border-amber-400 {
+  border-color: var(--ritmo-blue);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .bg-amber-400 {
+  background-color: var(--ritmo-blue);
+}
+
+/* Raised play controls: controlled blue gradient and a single quiet edge. */
+:where(#root > .min-h-screen[dir="rtl"]) button.bg-amber-400.rounded-full {
+  color: var(--ritmo-background);
+  background-image: linear-gradient(155deg, var(--ritmo-soft), var(--ritmo-blue) 48%, var(--ritmo-button-bottom));
+  box-shadow: inset 0 1px 0 rgb(173 217 244 / 28%), var(--ritmo-shadow-small);
+}
+
+/* Sort and speed selection use the same restrained tint, not a bright fill. */
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-amber-400/15"],
+:where(#root > .min-h-screen[dir="rtl"]) button.bg-amber-400:not(.rounded-full) {
+  color: var(--ritmo-soft);
+  background-color: var(--ritmo-selected);
+  background-image: linear-gradient(150deg, var(--ritmo-selected), var(--ritmo-surface));
+  box-shadow: inset 0 0 0 1px var(--ritmo-border);
+}
+
+/* The current song is shared by Songs, Videos, Favorites and grouped lists. */
+:where(#root > .min-h-screen[dir="rtl"]) div.border-b.text-amber-400 {
+  background-color: var(--ritmo-background-secondary);
+  background-image: linear-gradient(90deg, var(--ritmo-background-secondary), var(--ritmo-selected));
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) button.border-b.text-amber-400 {
+  background-color: var(--ritmo-selected);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-black/50"] {
+  background-color: rgb(8 11 17 / 64%);
+  color: var(--ritmo-soft);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .text-rose-400 {
+  color: var(--ritmo-favorite);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .fill-rose-400 {
+  fill: var(--ritmo-favorite);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) .text-rose-300 {
+  color: var(--ritmo-danger);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) [class~="bg-rose-500/10"] {
+  background-color: var(--ritmo-danger-surface);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) button[aria-pressed="false"] .lucide-heart,
+:where(#root > .min-h-screen[dir="rtl"]) .lucide-more-vertical {
+  color: var(--ritmo-secondary);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) button:disabled {
+  color: var(--ritmo-disabled);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input::placeholder {
+  color: var(--ritmo-muted);
+}
+
+:where(#root > .min-h-screen[dir="rtl"])::selection,
+:where(#root > .min-h-screen[dir="rtl"]) ::selection {
+  color: var(--ritmo-text);
+  background-color: var(--ritmo-selected);
+}
+
+/* Artwork is never recolored; only its existing container gains a quiet edge. */
+:where(#root > .min-h-screen[dir="rtl"]) img.rounded-lg,
+:where(#root > .min-h-screen[dir="rtl"]) img.rounded-2xl {
+  background-color: var(--ritmo-surface);
+  box-shadow: 0 0 0 1px var(--ritmo-divider), var(--ritmo-shadow-small);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) img.rounded-2xl {
+  box-shadow: 0 0 0 1px var(--ritmo-border), 0 12px 28px rgb(4 8 14 / 32%);
+}
+
+/* No animation, scaling, or geometry is introduced for interactive states. */
+:where(#root > .min-h-screen[dir="rtl"]) button:focus-visible,
+:where(#root > .min-h-screen[dir="rtl"]) input:focus-visible {
+  outline: 2px solid var(--ritmo-soft);
+  outline-offset: 2px;
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) button.bg-amber-400.rounded-full:active {
+  background-image: linear-gradient(155deg, var(--ritmo-blue), var(--ritmo-button-bottom));
+  box-shadow: inset 0 1px 3px rgb(4 8 14 / 28%);
+}
+
+@media (hover: hover) {
+  :where(#root > .min-h-screen[dir="rtl"]) button[class~="bg-white/10"]:hover,
+  :where(#root > .min-h-screen[dir="rtl"]) button[class~="bg-white/5"]:hover {
+    background-image: linear-gradient(150deg, var(--ritmo-elevated), var(--ritmo-surface));
+    box-shadow: inset 0 0 0 1px var(--ritmo-border), var(--ritmo-shadow-small);
+  }
+}
+
+/* Retain the original thumb dimensions and handlers; replace only paint/glow. */
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"] {
+  accent-color: var(--ritmo-soft);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(var(--ritmo-border), var(--ritmo-border)) center / 100% 3px no-repeat;
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"]::-moz-range-track {
+  background: linear-gradient(var(--ritmo-border), var(--ritmo-border)) center / 100% 3px no-repeat;
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"]::-moz-range-progress {
+  background-color: var(--ritmo-blue);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"]::-webkit-slider-thumb {
+  background-color: var(--ritmo-soft);
+  box-shadow: 0 1px 4px rgb(4 8 14 / 30%);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"]::-moz-range-thumb {
+  background-color: var(--ritmo-soft);
+  box-shadow: 0 1px 4px rgb(4 8 14 / 30%);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) input[type="range"]:hover::-webkit-slider-thumb {
+  box-shadow: 0 1px 5px rgb(4 8 14 / 36%);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) ::-webkit-scrollbar-track {
+  background-color: var(--ritmo-background-secondary);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) ::-webkit-scrollbar-thumb {
+  background-color: var(--ritmo-border);
+}
+
+:where(#root > .min-h-screen[dir="rtl"]) ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ritmo-edge);
+}
+
+/* Scoped fixes only. Existing palette and compatibility rules above are unchanged. */
+.ritmo-dialog {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: 440px;
+  max-height: 85vh;
+  max-height: 85dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--ritmo-border);
+  border-radius: 20px;
+  padding: 20px;
+  color: var(--ritmo-text);
+  background: var(--ritmo-surface);
+  box-shadow: var(--ritmo-shadow-floating);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.ritmo-dialog h2 { font-size: 20px; font-weight: 700; line-height: 1.5; }
+.ritmo-dialog p { line-height: 1.65; }
+.ritmo-dialog button, .ritmo-option { font-size: 14px; font-weight: 600; line-height: 1.6; }
+.ritmo-dialog input, .ritmo-dialog select { font-size: 14px; line-height: 1.6; }
+:where(#root > .min-h-screen[dir="rtl"]) nav button { font-weight: 500; }
+.ritmo-dialog::backdrop { background: rgb(4 8 14 / 65%); }
+.ritmo-centered-dialog { margin: auto; }
+.ritmo-dialog-playlist-name { position: fixed; inset: 50% auto auto 50%; transform: translate(-50%, -50%); margin: 0; max-width: 420px; min-height: 0; max-height: min(calc(100dvh - 24px), 390px); border: 1px solid var(--ritmo-edge); border-radius: 24px; padding: 22px; color: var(--ritmo-text); background: #141a23; background-color: #141a23; box-shadow: 0 24px 72px rgb(0 0 0 / 58%), inset 0 1px 0 rgb(255 255 255 / 6%); color-scheme: dark; }
+.ritmo-dialog-playlist-name form { padding-top: 2px; }
+.ritmo-dialog-playlist-name .ritmo-name-input { min-height: 52px; background: #0d121a; color: #f1f4f7; border-color: #344352; }
+.ritmo-dialog-playlist-name::backdrop { background: rgb(1 4 9 / 78%); backdrop-filter: blur(8px); }
+.ritmo-bottom-sheet {
+  inset: auto 0 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;
+  max-height: 78vh;
+  max-height: 78dvh;
+  border-radius: 20px 20px 0 0;
+  padding: 12px 16px max(16px, env(safe-area-inset-bottom));
+}
+.ritmo-sheet-handle { width: 36px; height: 4px; margin: 0 auto 8px; border-radius: 999px; background: var(--ritmo-edge); }
+.ritmo-dialog-dismiss { min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+.ritmo-option { min-height: 48px; padding: 12px 16px; border: 1px solid var(--ritmo-border); border-radius: 12px; background: var(--ritmo-elevated); text-align: start; }
+.ritmo-option:disabled { opacity: .5; cursor: not-allowed; }
+.ritmo-playlist-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.ritmo-playlist-actions > button { flex: 1 1 140px; }
+.ritmo-playlist-detail { position:fixed; inset:0; z-index:45; overflow-y:auto; min-height:100dvh; padding:8px 16px 28px; background:var(--ritmo-background); }
+.ritmo-playlist-detail-content { width:100%; max-width:620px; margin:0 auto; }
+.ritmo-playlist-detail-toolbar { display:flex; justify-content:space-between; align-items:center; min-height:56px; }
+.ritmo-playlist-menu-wrap { position:relative; }
+.ritmo-playlist-menu-button { width:44px; height:44px; display:grid; place-items:center; color:var(--ritmo-text); }
+.ritmo-playlist-menu { position:absolute; z-index:4; top:46px; inset-inline-end:0; display:grid; gap:2px; min-width:170px; padding:8px; border:1px solid var(--ritmo-border); border-radius:12px; background:var(--ritmo-elevated); box-shadow:var(--ritmo-shadow-floating); }
+.ritmo-playlist-menu button { min-height:42px; padding:8px 12px; text-align:start; color:var(--ritmo-text); border-radius:8px; }
+.ritmo-playlist-menu button:hover { background:var(--ritmo-selected); }
+.ritmo-playlist-detail-content > .flex.gap-3.items-center.mb-3 { padding:12px 16px; margin-bottom:8px; border-radius:16px; background:var(--ritmo-surface); }
+.ritmo-playlist-detail-content > .ritmo-playlist-actions { padding:0 16px; }
+.ritmo-playlist-detail-content > .flex.items-center.gap-2 { min-height:70px; padding:4px 0; border-bottom:1px solid var(--ritmo-divider); }
+.ritmo-dialog-actions { display: flex; gap: 12px; margin-top: 24px; }
+.ritmo-dialog-actions > button { flex: 1; text-align: center; }
+.ritmo-dialog-close { width: 100%; margin-top: 24px; text-align: center; color: var(--ritmo-soft); }
+.ritmo-name-input { width: 100%; min-height: 48px; padding: 12px 16px; border: 1px solid var(--ritmo-border); border-radius: 12px; background: var(--ritmo-background-secondary); color: var(--ritmo-text); }
+.ritmo-search-box, .ritmo-search-input { border-radius: 999px; background: var(--ritmo-background-secondary); color: var(--ritmo-text); border: 1px solid var(--ritmo-border); }
+.ritmo-search-box { min-width: 0; padding: 4px 12px; min-height: 44px; }
+.ritmo-search-box button { min-width: 44px; min-height: 36px; display: grid; place-items: center; }
+.ritmo-search-box:focus-within, .ritmo-name-input:focus-visible, .ritmo-search-input:focus-visible, .ritmo-option:focus-visible, .ritmo-dialog button:focus-visible { outline: 2px solid var(--ritmo-soft); outline-offset: 2px; }
+.ritmo-option, .ritmo-playlist-menu-button, .ritmo-playlist-detail-toolbar > button,
+.ritmo-dialog button, header button, .ritmo-playlist-detail-content > button {
+  min-width: 44px;
+  min-height: 44px;
+}
+button:disabled { cursor: not-allowed; }
+.ritmo-status {
+  width: min(100% - 32px, 720px);
+  margin: 12px auto;
+  padding: 10px 14px;
+  border: 1px solid var(--ritmo-border);
+  border-radius: var(--ritmo-radius-md);
+  background: var(--ritmo-surface);
+  color: var(--ritmo-text);
+}
+.ritmo-status-error { color: var(--ritmo-danger); background: var(--ritmo-danger-surface); }
+.ritmo-status-info { color: var(--ritmo-secondary); }
+.ritmo-status-loading { color: var(--ritmo-soft); }
+.ritmo-status-empty { color: var(--ritmo-muted); text-align: center; }
+.ritmo-artists { min-width: 0; overflow-wrap: anywhere; }
+.ritmo-artists > button { min-width: 0; }
+.ritmo-artists svg { flex-shrink: 0; }
+input[type="range"].ritmo-seek { height: 24px; background: transparent; }
+input[type="range"].ritmo-seek::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--ritmo-blue) 0%, var(--ritmo-blue) var(--ritmo-progress, 0%), var(--ritmo-border) var(--ritmo-progress, 0%), var(--ritmo-border) 100%);
+}
+input[type="range"].ritmo-seek::-webkit-slider-thumb { margin-top: -4.5px; }
+input[type="range"].ritmo-seek::-moz-range-track { height: 5px; border-radius: 999px; background: var(--ritmo-border); }
+input[type="range"].ritmo-seek::-moz-range-progress { height: 5px; border-radius: 999px; background: var(--ritmo-blue); }
+
+/* Additional App Themes: palette tokens only, no layout or behavior changes. */
+:root[data-ritmo-theme="velvet"] {
+  --ritmo-background:#100E18; --ritmo-background-secondary:#191624;
+  --ritmo-surface:#242034; --ritmo-elevated:#302A42; --ritmo-border:#494059;
+  --ritmo-divider:#352F46; --ritmo-blue:#9074C2; --ritmo-soft:#B9A1E8;
+  --ritmo-selected:#3C2E57; --ritmo-edge:#514568; --ritmo-button-bottom:#7259A0;
+}
+:root[data-ritmo-theme="platinum"] {
+  --ritmo-background:#101215; --ritmo-background-secondary:#191C20;
+  --ritmo-surface:#23272C; --ritmo-elevated:#30353B; --ritmo-border:#454D56;
+  --ritmo-divider:#343B43; --ritmo-blue:#8194A7; --ritmo-soft:#BAC5D1;
+  --ritmo-selected:#354452; --ritmo-edge:#505D69; --ritmo-button-bottom:#66798C;
+}
+:root[data-ritmo-theme="amber"] {
+  --ritmo-background:#17100D; --ritmo-background-secondary:#231A15;
+  --ritmo-surface:#30231E; --ritmo-elevated:#3D2E26; --ritmo-border:#604737;
+  --ritmo-divider:#46352B; --ritmo-blue:#C6834E; --ritmo-soft:#E9A36A;
+  --ritmo-selected:#503622; --ritmo-edge:#6E503D; --ritmo-button-bottom:#9F663C;
+}
+:root[data-ritmo-theme="burgundy"] {
+  --ritmo-background:#170F14; --ritmo-background-secondary:#22171F;
+  --ritmo-surface:#2E1D26; --ritmo-elevated:#3C2833; --ritmo-border:#5B3B4A;
+  --ritmo-divider:#432C38; --ritmo-blue:#BA6D83; --ritmo-soft:#DE91A5;
+  --ritmo-selected:#4D283A; --ritmo-edge:#6B4356; --ritmo-button-bottom:#97576B;
+}
+:root[data-ritmo-theme="bronze"] {
+  --ritmo-background:#15120E; --ritmo-background-secondary:#201C16;
+  --ritmo-surface:#29251E; --ritmo-elevated:#373026; --ritmo-border:#544936;
+  --ritmo-divider:#40382A; --ritmo-blue:#B49A61; --ritmo-soft:#D5BC83;
+  --ritmo-selected:#453B27; --ritmo-edge:#62533D; --ritmo-button-bottom:#907A49;
+}
+
+/* Cinematic treatment belongs to the application shell only. Modal and player
+   surfaces intentionally stay independent so they remain readable. */
+#root > .min-h-screen[dir="rtl"] {
+  isolation: isolate;
+  background-image: var(--ritmo-shell-glow);
+}
+
+:is(.ritmo-dialog, .ritmo-player, .ritmo-settings, .skin-menu-dialog,
+    #root > .min-h-screen > .fixed.inset-0.z-50) {
+  isolation: isolate;
+  background-color: var(--ritmo-background);
+  background-image: none;
+}
+
+:is(.ritmo-dialog, .ritmo-player, .ritmo-settings, .skin-menu-dialog) :is(.ritmo-dialog-surface, .ritmo-player-shell, .skin-menu-panel) {
+  background-color: var(--ritmo-surface);
+  border-color: var(--ritmo-border);
+}
+
+/* Product-wide finish: quiet surfaces, consistent focus, and predictable touch feedback. */
+:is(#root > .min-h-screen[dir="rtl"], .ritmo-dialog) button:not(:disabled),
+:is(#root > .min-h-screen[dir="rtl"], .ritmo-dialog) [role="button"] {
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+:is(#root > .min-h-screen[dir="rtl"], .ritmo-dialog) button:active:not(:disabled),
+:is(#root > .min-h-screen[dir="rtl"], .ritmo-dialog) [role="button"]:active {
+  transform: translateY(1px);
+}
+:is(#root > .min-h-screen[dir="rtl"], .ritmo-dialog) :is(button,input,select,[role="button"]):focus-visible {
+  outline: 2px solid var(--ritmo-soft);
+  outline-offset: 2px;
+  box-shadow: var(--ritmo-focus);
+}
+#root > .min-h-screen[dir="rtl"]::before,
+#root > .min-h-screen[dir="rtl"]::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  animation:none;
+}
+#root > .min-h-screen[dir="rtl"]::before {
+  background-image:
+    radial-gradient(ellipse 36% 18% at 50% 84%,rgb(113 22 41 / .10),transparent 76%),
+    radial-gradient(ellipse 30% 10% at 50% 90%,rgb(168 35 54 / .08),transparent 78%);
+}
+#root > .min-h-screen[dir="rtl"]::after {
+  background-image:
+    radial-gradient(ellipse 22% 8% at 50% 92%,rgb(218 57 75 / .07),transparent 76%),
+    linear-gradient(180deg,transparent 72%,rgb(0 0 0 / .18) 100%);
+}
+@media(prefers-reduced-motion:reduce) {
+  #root > .min-h-screen[dir="rtl"]::before,
+  #root > .min-h-screen[dir="rtl"]::after {
+    animation:none;
+  }
+}
+
+@media (max-width: 430px) {
+  .ritmo-sort-menu, .ritmo-playlist-menu {
+    max-width: calc(100vw - 24px);
+    max-height: min(60dvh, 360px);
+    overflow-y: auto;
+  }
+  .ritmo-playlist-actions > button { flex-basis: 100%; }
+  .ritmo-playlist-detail-content { padding-inline: 8px; }
+}
+
+@media (min-width: 431px) {
+  .ritmo-sort-menu, .ritmo-playlist-menu { max-height: min(70dvh, 480px); overflow-y: auto; }
+}
+
+@media (orientation: landscape) and (max-height: 650px) {
+  .ritmo-player { padding-block: max(8px, env(safe-area-inset-top)) max(28px, calc(env(safe-area-inset-bottom, 0px) + 12px)); }
+  .ritmo-player-shell { gap: 8px; }
+  .ritmo-skin-stage { padding-block: 4px; }
+}
+
+/* Manual song order: one subtle, touch-safe drag handle; rows remain scrollable. */
+.ritmo-song-drag-handle { min-width:36px !important; min-height:44px !important; padding:0 4px; color:var(--ritmo-secondary); font-size:22px; line-height:1; cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none; }
+.ritmo-song-drag-handle:active { cursor:grabbing; color:var(--ritmo-soft); }
+
+/* Album artwork in the mini-player is intentionally independent of player skins. */
+.ritmo-mini-artwork { display:block; width:40px; height:40px; flex:0 0 40px; border-radius:10px; object-fit:cover; box-shadow:0 2px 7px rgb(0 0 0 / 24%); }
+/* Search focus belongs to the single outer field; the inner input never draws a second rectangle. */
+.ritmo-search-box { position:relative; border-color:var(--ritmo-border); box-shadow:inset 0 1px 2px rgb(0 0 0 / 22%),0 2px 7px rgb(0 0 0 / 14%); transition:border-color 160ms ease,box-shadow 160ms ease,transform 160ms ease; }
+.ritmo-search-box:focus-within { outline:2px solid var(--ritmo-soft); outline-offset:2px; border-color:var(--ritmo-soft); box-shadow:inset 0 1px 2px rgb(0 0 0 / 16%),0 5px 16px rgb(0 0 0 / 24%),0 0 0 4px color-mix(in srgb,var(--ritmo-soft) 16%,transparent); transform:translateY(-1px); }
+#root > .min-h-screen[dir="rtl"] .ritmo-search-box input:focus-visible { outline:none; outline-offset:0; box-shadow:none; border:0; }
+#root > .min-h-screen[dir="rtl"] .ritmo-search-box input { min-height:34px; border:0; border-radius:inherit; background:transparent; box-shadow:none; }
+.ritmo-search-box button:focus-visible { outline:2px solid var(--ritmo-soft); outline-offset:0; border-radius:50%; }
+@media(prefers-reduced-motion:reduce) { .ritmo-search-box { transition:none; } }
+/* Main library drag uses the same elevated pickup and clear landing cue as playlists. */
+.ritmo-song-row { transition:background-color 180ms ease,border-radius 180ms ease; }
+.ritmo-song-row.ritmo-manual-dragging { position:relative; z-index:4; opacity:.98; transform:scale(1.035) translateY(-2px); box-shadow:0 16px 32px rgb(0 0 0 / 38%),inset 0 1px rgb(255 255 255 / 14%); border-radius:14px; background:var(--ritmo-surface); }
+.ritmo-song-row.ritmo-manual-drop-target { box-shadow:inset 0 -3px 0 var(--ritmo-soft); }
+@media(prefers-reduced-motion:reduce) { .ritmo-song-row { transition:none; } }
+.ritmo-song-row.ritmo-manual-dragging { transition:none; will-change:transform; }
+.ritmo-song-row.ritmo-manual-shift-up,.ritmo-song-row.ritmo-manual-shift-down { transition:transform 150ms cubic-bezier(.2,.75,.25,1); will-change:transform; }
+@media(prefers-reduced-motion:reduce) { .ritmo-song-row.ritmo-manual-shift-up,.ritmo-song-row.ritmo-manual-shift-down { transition:none; } }
+
+/* Keep playlist confirmation reachable while the track picker scrolls or the keyboard is open. */
+.ritmo-picker-sticky-footer {
+  position:sticky;
+  bottom:calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index:2;
+  display:flex;
+  justify-content:stretch;
+  margin:8px -12px -8px;
+  padding:16px 12px 12px;
+  background:linear-gradient(180deg,transparent 0%,rgb(10 12 19 / 88%) 24%,#0a0c13 100%);
+  backdrop-filter:blur(10px);
+}
+.ritmo-picker-sticky-footer button { width:100%; min-height:48px; border-radius:14px; background:#fbbf24; color:#15130d; font-weight:700; box-shadow:0 6px 18px #0007,inset 0 1px #fff8; }
+.ritmo-picker-sticky-footer button:disabled { opacity:.5; }

@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Android build outputs & local config
+android/.gradle/
+android/**/build/
+android/app/build/
+android/local.properties
+local.properties
+*.apk
+*.aab
+*.jks
+*.keystore
+*.p12
+
+# Keep Gradle wrapper!
+!android/gradlew
+!android/gradlew.bat
+!android/gradle/wrapper/gradle-wrapper.jar
+!android/gradle/wrapper/gradle-wrapper.properties
+
+# Environment variables & secrets
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# Logs and system
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+*.zip
+
+# Local editor, signing and temporary files (never needed by CI)
+.idea/
+.vscode/
+*.tmp
+*.swp
+*~
+android/key.properties
+android/keystore.properties
+android/app/google-services.json

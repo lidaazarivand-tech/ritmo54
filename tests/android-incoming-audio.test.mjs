@@ -1,0 +1,45 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const read=path=>readFileSync(new URL(`../${path}`,import.meta.url),'utf8');
+test('Android launcher accepts audio and video content URIs from compatible providers and captures new intents',()=>{
+ const manifest=read('android/app/src/main/AndroidManifest.xml');const activity=read('android/app/src/main/java/com/adelapp/larkplayer/MainActivity.java');
+ assert.match(activity,/private void captureIncomingAudio\(Intent intent\)/);
+ assert.doesNotMatch(activity,/private static void captureIncomingAudio\(Intent intent\)/);
+ assert.match(manifest,/<action android:name="android.intent.action.VIEW" \/>/);
+ assert.match(manifest,/<data android:scheme="content" android:mimeType="audio\/\*" \/>/);
+ assert.match(manifest,/<data android:scheme="content" android:mimeType="video\/\*" \/>/);
+ assert.equal((manifest.match(/android:mimeType="audio\/\*"/g)||[]).length,1);
+ assert.match(activity,/Intent\.ACTION_VIEW/);assert.match(activity,/startsWith\("audio\/"\)/);assert.match(activity,/startsWith\("video\/"\)/);
+ assert.match(activity,/onNewIntent\(Intent intent\)/);assert.match(activity,/consumeIncomingAudio\(\)/);
+ assert.match(activity,/new IncomingAudioRequest\(uri\.toString\(\), type\)/);
+ assert.match(activity,/mimeFromFileName\(uri\)/);
+ assert.doesNotMatch(activity,/getPath\(\).*external|external_primary/);
+});
+test('incoming content URI is stream-copied to app-private audio or video storage and routed to the right player',()=>{
+ const plugin=read('android/app/src/main/java/com/adelapp/larkplayer/NativeMediaPlugin.java');
+ const app=read('src/RitmoAppClean.tsx');const bridge=read('src/utils/nativeMedia.ts');
+ const paths=read('android/app/src/main/res/xml/file_paths.xml');
+ const incoming=plugin.slice(plugin.indexOf('public void consumeIncomingAudio'),
+   plugin.indexOf('private static final long MAX_SHARED_MEDIA_BYTES'));
+ assert.match(plugin,/consumeIncomingAudio\(PluginCall call\)/);
+ assert.match(plugin,/consumeIncomingMedia\(PluginCall call\)/);
+ assert.match(incoming,/resolver\.query\(uri,\s*new String\[\]\{OpenableColumns\.DISPLAY_NAME, OpenableColumns\.SIZE\}/);
+ assert.match(incoming,/resolver\.openInputStream\(uri\)/);
+ assert.match(plugin,/MAX_SHARED_MEDIA_BYTES/);
+ assert.match(plugin,/getFilesDir\(\), "shared-" \+ mediaType/);
+ assert.match(plugin,/getFilesDir\(\), "shared-" \+ mediaType/);
+ assert.match(plugin,/FileProvider\.getUriForFile/);
+ assert.match(plugin,/RecoveryPolicy\.mediaUri\(id, playbackUriString, mediaType\)/);
+ assert.match(paths,/<files-path name="shared-audio" path="shared-audio\/" \/>/);
+ assert.match(paths,/<files-path name="shared-video" path="shared-video\/" \/>/);
+ assert.match(plugin,/sharedMediaExtension\(displayName, resolvedMime, mediaType\)/);
+ assert.match(bridge,/consumeIncomingAudio\(\): Promise<\{ item: NativeItem \| null \}>/);
+ assert.match(bridge,/consumeIncomingMedia\(\): Promise<\{ item: NativeItem \| null \}>/);
+ assert.match(app,/const consumeIncomingMedia = async/);assert.match(app,/await play\(track, \[track\]\)/);
+ assert.match(app,/item\.type === 'video' \? 'ritmo_shared_video' : 'ritmo_shared_audio'/);
+ assert.match(app,/tab: item\.type === 'video' \? 'videos' : 'songs'/);
+ assert.match(app,/CapApp\.addListener\('appUrlOpen'/);
+ assert.doesNotMatch(incoming,/uri\.getPath\(\)|MediaStore\.Audio/);
+ assert.match(plugin,/RecoveryPolicy\.mediaUri\(row\.getString\("id"\), row\.getString\("uri"\), "audio"\)/);
+});

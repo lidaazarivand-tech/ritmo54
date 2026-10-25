@@ -1,0 +1,85 @@
+/* Every rule is scoped to this new skin. No existing skin/global overrides. */
+.ritmo-nocturne {
+  position:relative; isolation:isolate; width:100%; aspect-ratio: 618 / 1336; overflow:hidden;
+  border-radius:30px; background:#17181d; color:#f6f7ff; container-type:inline-size;
+  border:1px solid #f6f7ff18; font-family:inherit; box-sizing:border-box;
+}
+.ritmo-nocturne * { box-sizing:border-box; }
+.ritmo-nocturne-art { position:absolute; inset:0 0 25%; z-index:-3; background:linear-gradient(145deg,#42434b,#1b1c23); }
+.ritmo-nocturne-art > * { width:100%; height:100%; border-radius:0; }
+.ritmo-nocturne-art img { display:block; width:100%; height:100%; object-fit:contain; object-position:center; filter:grayscale(1); border-radius:0; }
+.ritmo-nocturne-shade { position:absolute; inset:0; z-index:-2; background:linear-gradient(180deg,#11121966 0%,transparent 25%,#11121b22 40%,#090b29dc 64%,#060719 100%); }
+.ritmo-nocturne-console { position:absolute; bottom:0; left:0; width:100%; height:45.284%; }
+.ritmo-nocturne-curved-title { position:absolute; left:0; bottom:100%; width:100%; height:auto; aspect-ratio:618 / 240; margin-bottom:-17.8%; overflow:visible; pointer-events:none; }
+.ritmo-nocturne-curved-title text { font-family:inherit; font-size:28px; font-weight:600; fill:#f6f7ff; filter:drop-shadow(0 2px 5px #0009); }
+.ritmo-nocturne-console::before { content:""; position:absolute; z-index:-1; top:0; left:-15%; width:130%; aspect-ratio:1; border-radius:50%; border:1px solid #c4c9ff60; background:radial-gradient(ellipse at 50% 0%,#9fa1ff66 0%,#434dba35 24%,#15173a70 45%,#040617 78%); box-shadow:0 -1px 14px #acaaff22; }
+.ritmo-nocturne-arc { position:absolute; width:100%; height:100%; inset:0; overflow:visible; touch-action:pan-y; }
+.ritmo-nocturne-arc-track,.ritmo-nocturne-arc-progress { fill:none; stroke-width:3; stroke-linecap:round; }
+.ritmo-nocturne-arc-track { stroke:#06071bea; }
+.ritmo-nocturne-arc-progress { stroke-width:3; }
+.ritmo-nocturne-arc-touch { fill:none; stroke:transparent; stroke-width:70; pointer-events:stroke; touch-action:none; cursor:pointer; }
+.ritmo-nocturne-time,.ritmo-nocturne-favorite,.ritmo-nocturne-utilities,.ritmo-nocturne-transport { pointer-events:none; }
+.ritmo-nocturne button { pointer-events:auto; }
+.ritmo-nocturne-seek { position:absolute; top:8%; left:20%; width:60%; height:24px; opacity:.001; cursor:pointer; z-index:4; margin:0; pointer-events:none; }
+.ritmo-nocturne-seekbar { position:absolute; top:8%; left:20%; width:60%; z-index:4; opacity:.001; }
+.ritmo-nocturne-seekbar .ritmo-seek { width:100%; height:44px !important; }
+.ritmo-nocturne-live:has(.ritmo-nocturne-seek:focus-visible) .ritmo-nocturne-console { outline:2px solid #b1acff; outline-offset:-5px; }
+.ritmo-nocturne-favorite { position:absolute; top:20.5%; left:50%; transform:translate(-50%,-50%); }
+.ritmo-nocturne .ritmo-nocturne-heart { color:#c1b6ff; width:44px; height:44px; background:transparent; border:0; display:grid; place-items:center; border-radius:50%; padding:10px; }
+.ritmo-nocturne-time { position:absolute; top:29.5%; left:0; width:100%; margin:0; text-align:center; font-size:clamp(14px,4cqi,18px); font-variant-numeric:tabular-nums; letter-spacing:1px; }
+.ritmo-nocturne-utilities { position:absolute; top:41.5%; left:13.5%; right:13.5%; display:flex; justify-content:space-between; }
+.ritmo-nocturne .ritmo-nocturne-utility { width:44px; height:44px; padding:11px; border:1px solid #f6f7ff16; border-radius:50%; color:#f6f7ff; background:#0b102833; display:grid; place-items:center; }
+.ritmo-nocturne-transport { position:absolute; left:7.5%; right:7.5%; top:63.1%; height:24%; transform:translateY(-50%); border-radius:50%; background:linear-gradient(90deg,#20234666,#282c5e88,#20234666); display:flex; align-items:center; justify-content:space-between; }
+.ritmo-nocturne .ritmo-nocturne-skip { min-width:44px; min-height:44px; width:17%; height:44px; border:0; color:#f6f7ff; background:transparent; display:grid; place-items:center; padding:10px; }
+.ritmo-nocturne-halo { position:absolute; width:51.4%; aspect-ratio:1; left:24.3%; top:50%; transform:translateY(-50%); border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle,#1330a1 24%,#0d20b9 41%,#030841 60%,#02051c 71%); box-shadow:0 0 0 16px #959dff18,0 0 30px #293eff77,inset 0 0 28px #080919; }
+.ritmo-nocturne-halo i { position:absolute; inset:12%; border:2px solid #233cff; border-radius:47% 53% 45% 55%; box-shadow:0 0 12px #173eff,inset 0 0 10px #173eff; animation:ritmo-nocturne-orbit 8s linear infinite paused; pointer-events:none; }
+.ritmo-nocturne-halo i:nth-child(2) { inset:18%; border-color:#506cff; animation-direction:reverse; animation-duration:6s; opacity:.65; }
+.ritmo-nocturne-playing .ritmo-nocturne-halo i { animation-play-state:running; }
+.ritmo-nocturne .ritmo-nocturne-play { position:relative; width:54%; height:54%; min-width:44px; min-height:44px; padding:0; border:0; border-radius:50%; background:#f6f7ff; color:#07091c; box-shadow:0 0 22px #0faeffcc; display:grid; place-items:center; }
+.ritmo-nocturne .ritmo-nocturne-play svg { position:absolute; left:32.5%; top:32.5%; width:35%; height:35%; flex:none; max-width:none; max-height:none; stroke-width:1.5; }
+.ritmo-nocturne-toolbar { position:absolute; top:2.4%; inset-inline:4%; display:flex; justify-content:space-between; align-items:center; z-index:5; }
+.ritmo-nocturne-toolbar > div { display:flex; direction:ltr; gap:0; }
+.ritmo-nocturne-toolbar button { width:44px; height:44px; display:grid; place-items:center; color:#f6f7ff; background:transparent; border:0; }
+.ritmo-nocturne button { cursor:pointer; }
+.ritmo-nocturne button:focus-visible { outline:2px solid #b1acff; outline-offset:4px; }
+.ritmo-nocturne-status { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.skin-nocturne .ritmo-skin-device { max-width:360px; }
+.skin-compact .ritmo-nocturne { aspect-ratio:1; border-radius:20%; }
+.skin-compact .ritmo-nocturne-curved-title,
+.skin-compact .ritmo-nocturne-favorite,.skin-compact .ritmo-nocturne-time,
+.skin-compact .ritmo-nocturne-utilities,.skin-compact .ritmo-nocturne-skip { display:none; }
+.skin-compact .ritmo-nocturne-console { height:75%; }
+.skin-compact .ritmo-nocturne-transport { top:43%; }
+.skin-compact .ritmo-nocturne-play { min-width:0; min-height:0; }
+.skin-compact .ritmo-nocturne-halo { box-shadow:0 0 0 2px #959dff18; }
+.ritmo-skin-choice .skin-nocturne .ritmo-skin-device { width:auto; height:100%; aspect-ratio:618 / 1336; min-width:0; max-width:100%; max-height:100%; }
+.ritmo-skin-choice .skin-nocturne .ritmo-nocturne { width:100%; height:100%; min-height:0; border-radius:6px; }
+.ritmo-skin-choice .skin-nocturne { overflow:hidden; }
+.ritmo-skin-choice .ritmo-nocturne-curved-title { display:none; }
+.ritmo-skin-choice .ritmo-nocturne-halo { box-shadow:0 0 0 2px #959dff18; }
+.ritmo-skin-choice .ritmo-nocturne-time,.ritmo-skin-choice .ritmo-nocturne-utilities,.ritmo-skin-choice .ritmo-nocturne-favorite { display:none; }
+.ritmo-skin-choice .ritmo-nocturne-play { min-width:0; min-height:0; }
+.ritmo-skin-choice .ritmo-nocturne-skip { min-width:0; min-height:0; padding:0; }
+.ritmo-skin-choice .ritmo-nocturne-skip svg { width:12px; }
+.ritmo-player .ritmo-nocturne-live { width:100%; max-width:420px; flex:none; margin-inline:auto; }
+.ritmo-player.ritmo-player-nocturne { padding:0; overflow:hidden; overscroll-behavior:none; touch-action:pan-y; }
+.ritmo-player-nocturne > .ritmo-player-shell { width:100%; max-width:none; height:100%; min-height:0; gap:0; }
+.ritmo-player-nocturne .ritmo-nocturne-live { width:100%; max-width:none; height:100%; min-height:0; aspect-ratio:auto; border:0; border-radius:0; margin:0; }
+.ritmo-player-nocturne .ritmo-nocturne-art { inset:0 0 28%; }
+.ritmo-player-nocturne .ritmo-nocturne-console { width:min(100%,calc(53dvh * 618 / 605)); left:50%; transform:translateX(-50%); height:auto; aspect-ratio:618 / 605; bottom:max(88px,calc(16px + env(safe-area-inset-bottom,0px))); }
+.ritmo-player-nocturne .ritmo-nocturne-toolbar { top:max(2.4%,env(safe-area-inset-top,0px)); }
+@media (orientation:landscape) {
+  .ritmo-player-nocturne .ritmo-nocturne-console { width:min(100%,calc(80dvh * 618 / 605)); bottom:max(88px,calc(16px + env(safe-area-inset-bottom,0px))); }
+}
+@keyframes ritmo-nocturne-orbit { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { .ritmo-nocturne-halo i { animation:none; } }
+/* Full-screen subdued current artwork; smaller title just above the seek arc. */
+.ritmo-nocturne .ritmo-nocturne-art { inset:0; opacity:.28; background:#11152b; }
+.ritmo-nocturne .ritmo-nocturne-art img { object-fit:cover; filter:none; }
+.ritmo-nocturne .ritmo-nocturne-shade { background:linear-gradient(180deg,#070a2055,#090d2544 40%,#080b2299); }
+.ritmo-nocturne .ritmo-nocturne-curved-title { top:-15%; bottom:auto; margin:0; }
+.ritmo-nocturne .ritmo-nocturne-curved-title text { font-size:22px; font-weight:500; }
+@media(orientation:landscape) {
+  .ritmo-player-nocturne .ritmo-nocturne-console { width:min(70%,calc((100dvh - 172px) * 618 / 605)); bottom:max(88px,calc(16px + env(safe-area-inset-bottom,0px))); }
+  .ritmo-player-nocturne .ritmo-nocturne-curved-title text { font-size:40px; }
+}

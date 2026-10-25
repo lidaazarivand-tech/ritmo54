@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ریتمو</string>
+    <string name="title_activity_main">ریتمو</string>
+    <string name="package_name">com.adelapp.larkplayer</string>
+    <string name="custom_url_scheme">com.adelapp.larkplayer</string>
+</resources>

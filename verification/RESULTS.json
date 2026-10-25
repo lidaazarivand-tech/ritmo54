@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-23",
+  "delivery_status": "source_updated_with_chromium_and_node_pass_device_and_build_acceptance_pending",
+  "node_tests": {
+    "command": "node --experimental-strip-types --test tests/*.test.mjs",
+    "final": {
+      "tests": 237,
+      "passed": 237,
+      "failed": 0,
+      "skipped": 0
+    },
+    "previous_failure": {
+      "test": "all reorder surfaces use the shared FLIP helper and persist their existing order sources",
+      "root_cause": "test required inline listRef.current syntax although PlaylistDetail used the equivalent rowContainer alias",
+      "fix": "assert the shared DOM node alias and the FLIP capture/animation contract"
+    }
+  },
+  "chromium_component_checks": {
+    "command": "node verification/browser-smoke.mjs",
+    "status": "passed",
+    "checks": 28,
+    "drag": "live source transform, neighbor transforms, committed order, restored order after leaving and returning, cancellation, touch scroll and auto-scroll",
+    "lyrics": {
+      "status": "passed_with_intercepted_fixtures",
+      "exact_lookup": "track_name=ترانه جستجو and artist_name=خواننده",
+      "broad_query": "q=ترانه جستجو خواننده",
+      "title_fallback": "q=ترانه جستجو",
+      "live_provider": false
+    },
+    "scope": "Real Chromium component harness, not full production app or Android"
+  },
+  "npm_ci": {
+    "status": "not_run",
+    "reason": "npm and npx are not installed"
+  },
+  "typescript_lint": {
+    "status": "project_check_blocked",
+    "reason": "vite/client type definitions are not installed; focused PlaylistDetail.tsx semantic check passed"
+  },
+  "production_web_build": {
+    "status": "not_run",
+    "reason": "npm/Vite dependencies are not installed"
+  },
+  "capacitor_sync": {
+    "status": "not_run",
+    "reason": "npm/Capacitor CLI are not installed"
+  },
+  "android_build": {
+    "status": "not_run",
+    "reason": "JDK and Android SDK are not installed in the environment",
+    "apk_created": false
+  },
+  "device_playback": {
+    "status": "not_run",
+    "reason": "No Android SDK, Gradle distribution, device or emulator is available",
+    "implementation": "ContentResolver copies granted content:// audio streams from MediaStore or compatible document providers into app-private storage; playback uses a validated app FileProvider URI through the existing Media3 queue",
+    "file_scheme": "rejected",
+    "device_playback_verified": false
+  },
+  "github_actions": {
+    "failed_run_reviewed": "https://github.com/lidaazarivand-tech/ritmo47/actions/runs/40010804183",
+    "root_cause": "gesture state type omitted its before VerticalSnapshot although the state initializer and consumers used it",
+    "fix": "added before: VerticalSnapshot to the declared gesture state",
+    "workflow_review": "npm and Gradle commands match project scripts/layout; Node 20/action deprecation messages are warnings unrelated to the TypeScript failure and were not changed",
+    "new_run_status": "not_run",
+    "reason": "no GitHub write connection or local git checkout is available"
+  },
+  "focused_playlistdetail_typescript": {
+    "status": "passed",
+    "command": "TypeScript compiler with installed React type declarations, PlaylistDetail.tsx and its local imports",
+    "project_typecheck": "blocked",
+    "reason": "missing vite/client package types in the environment"
+  },
+  "web_build": {
+    "status": "not_run",
+    "reason": "Vite is not installed and npm is unavailable"
+  },
+  "android_apk_build": {
+    "status": "not_run",
+    "reason": "Android SDK is unavailable; Gradle distribution requires network access"
+  },
+  "github_push_performed": false
+}

@@ -1,0 +1,68 @@
+/* Alpha-matted photo in the existing slot. No global or transport changes. */
+.skin-cassette .ritmo-photo-scene {
+  position:relative;
+  width:100%;
+  aspect-ratio:1536 / 1284;
+  isolation:isolate;
+  contain:layout style;
+  overflow:hidden;
+}
+.skin-cassette .ritmo-photo-scene > .ritmo-reference-photo {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:0;
+}
+/* Full metal reel registration in the spaced 1536 x 1284 composition.
+   Normalize the complete disc, rotate it, then project onto its original ellipse.
+   Never rotate a rectangular crop or a fragment of the hub. */
+.skin-cassette .ritmo-photo-hub {
+  position:absolute;
+  pointer-events:none;
+  border-radius:50%;
+  overflow:hidden;
+}
+.skin-cassette .ritmo-photo-hub-left {
+  left:35.749817%; top:32.046994%; width:8.832465%; height:11.387905%;
+  --hub-projection:1.077794;
+}
+.skin-cassette .ritmo-photo-hub-right {
+  left:56.726922%; top:33.779936%; width:9.246487%; height:11.883032%;
+  --hub-projection:1.074297;
+}
+.skin-cassette .ritmo-photo-hub-plane {
+  position:absolute;
+  inset:0 auto auto 0;
+  width:100%;
+  aspect-ratio:1;
+  transform:scaleY(var(--hub-projection));
+  transform-origin:top left;
+}
+.skin-cassette .ritmo-photo-hub-plane > img {
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:contain;
+  transform-origin:50% 50%;
+  border-radius:50%;
+}
+/* Keep photographed axle highlights stationary over the rotating hub. */
+.skin-cassette .ritmo-photo-axle {
+  position:absolute;
+  left:41%; top:41%; width:18%; height:18%;
+  border-radius:50%;
+  background-image:url('./cassette-photo/reference.png');
+  background-repeat:no-repeat;
+}
+.skin-cassette .ritmo-photo-hub-left .ritmo-photo-axle {
+  background-size:6289.926290% 4878.470135%;
+  background-position:40.007179% 37.484399%;
+}
+.skin-cassette .ritmo-photo-hub-right .ritmo-photo-axle {
+  background-size:6008.287799% 4675.200546%;
+  background-position:61.542271% 39.496794%;
+}
+@media(prefers-reduced-motion:reduce) {
+  .skin-cassette .ritmo-photo-hub-plane > img { transform:none !important; }
+}

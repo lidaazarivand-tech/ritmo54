@@ -1,0 +1,276 @@
+/* Additive, scoped reference skins. No device frame or fake system status bar. */
+.ritmo-reference {
+  --ref-accent:#205bea; --ref-muted:#9298a5; position:relative; isolation:isolate;
+  width:100%; max-width:430px; min-width:0; aspect-ratio:400 / 860; margin-inline:auto;
+  display:flex; flex-direction:column; color:#f0f1f4; background:#050b14; border-radius:28px;
+  overflow:hidden; font-family:inherit; container-type:inline-size; direction:ltr;
+}
+.ritmo-reference *, .ritmo-reference *::before, .ritmo-reference *::after { box-sizing:border-box; }
+.ritmo-reference button, .ritmo-reference .ref-header > span, .ritmo-reference .ref-header > div > span {
+  border:0; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  background:transparent; color:inherit; padding:0; font:inherit; flex-shrink:0;
+}
+.ritmo-reference button { min-height:44px; min-width:44px; touch-action:manipulation; }
+.ritmo-reference button:focus-visible { outline:2px solid var(--ref-accent); outline-offset:3px; }
+.ritmo-reference button:active { transform:scale(.96); }
+.ritmo-reference svg { width:23px; height:23px; flex:none; }
+.ref-header { position:relative; display:flex; align-items:center; justify-content:space-between; padding:4% 5%; gap:4px; z-index:2; }
+.ref-header > div { display:flex; gap:0; }
+.ref-header .ref-now { display:flex; flex-direction:column; align-items:center; font-size:16px; color:var(--ref-muted); gap:8px; }
+.ref-now i { width:15px; height:4px; border-radius:4px; background:var(--ref-accent); }
+.ref-header .ref-back, .ref-header .ref-queue { width:42px; height:42px; border:1px solid #ffffff0a; border-radius:15px; background:linear-gradient(#171c26aa,#0d121b99); }
+.ref-header > .ref-header-menu { position:absolute; top:85%; right:5%; display:flex; flex-direction:column; gap:2px; width:210px; padding:8px; border:1px solid #ffffff20; border-radius:12px; background:#151b25; box-shadow:0 8px 25px #000b; z-index:8; }
+.ref-header-menu button { width:100%; justify-content:flex-start; padding:8px 12px; font-size:14px; border-radius:6px; }
+.ref-header-menu button:hover { background:#ffffff0a; }
+.ref-main { flex:1; display:flex; flex-direction:column; min-height:0; }
+.ref-planet-stage { position:relative; width:100%; aspect-ratio:392 / 371; margin-top:0; }
+.ref-planet-stage img { width:100%; height:100%; object-fit:cover; display:block; }
+.ref-planet-stage::after { position:absolute; content:""; inset:0; background:linear-gradient(#050b1400 68%,#050b14); pointer-events:none; }
+.ref-heading-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0 5%; margin-top:-1%; z-index:1; }
+.ref-details { min-width:0; flex:1; text-align:center; }
+.ref-details h1 { margin:0; font-size:clamp(18px,5.5cqi,25px); font-weight:500; line-height:1.35; overflow-wrap:anywhere; }
+.ref-studio-cassette .ref-details h1, .ref-midnight-orbit .ref-details h1 { font-size:clamp(16px,4.8cqi,22px); }
+.ref-details p { margin:5px 0 8px; font-size:clamp(14px,3.8cqi,17px); line-height:1.4; color:var(--ref-accent); overflow-wrap:anywhere; }
+.ref-metadata { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; color:var(--ref-muted); font-size:14px; line-height:1.6; }
+.ref-metadata span::before { content:"•"; margin-right:8px; }
+.ref-heart, .ref-more { width:40px; height:40px; border-radius:50%; background:linear-gradient(#131923,#0a1019) !important; border:1px solid #ffffff0b !important; color:var(--ref-muted) !important; }
+.ref-heart[aria-pressed=true] { color:var(--ref-accent) !important; }
+.ref-timeline { margin:9px 5% 0; }
+.ref-timeline .ritmo-seek { display:block; width:100%; background:transparent; appearance:none; margin:0; accent-color:var(--ref-accent); }
+.ritmo-reference .ref-timeline .ritmo-seek::-webkit-slider-runnable-track { height:3px; border-radius:4px; background:linear-gradient(to right,var(--ref-accent) var(--ritmo-progress),#282e38 var(--ritmo-progress)); }
+.ritmo-reference .ref-timeline .ritmo-seek::-webkit-slider-thumb { appearance:none; margin-top:-5px; width:13px; height:13px; border-radius:50%; background:var(--ref-accent); border:0; box-shadow:none; }
+.ritmo-reference .ref-timeline .ritmo-seek::-moz-range-track { height:3px; background:#282e38; border-radius:4px; }
+.ritmo-reference .ref-timeline .ritmo-seek::-moz-range-progress { height:3px; background:var(--ref-accent); }
+.ritmo-reference .ref-timeline .ritmo-seek::-moz-range-thumb { width:13px; height:13px; border:0; background:var(--ref-accent); border-radius:50%; box-shadow:none; }
+.ref-times { display:flex; justify-content:space-between; margin-top:-4px; font-size:14px; font-variant-numeric:tabular-nums; color:var(--ref-muted); }
+.ref-times > :first-child { color:var(--ref-accent); }
+.ref-static-seek { height:3px; background:#272e38; margin:22px 0 18px; }
+.ref-static-seek i { display:block; width:40%; height:100%; background:var(--ref-accent); }
+.ref-console { margin:auto 5% 5%; padding-top:15px; }
+.ref-transport { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+.ref-transport > span { display:grid; place-items:center; }
+.ref-transport .ref-play { width:80px; height:80px; border-radius:50%; background:linear-gradient(#111e34,#070d16); border:3px solid var(--ref-accent); box-shadow:0 0 16px #205bea50,inset 0 0 0 4px #03060b; }
+.ref-play svg { width:30px; height:30px; fill:currentColor; }
+.ref-skip svg { fill:currentColor; width:26px; height:26px; }
+.ref-mode { color:var(--ref-muted) !important; }
+.ref-mode.ref-active { color:var(--ref-accent) !important; }
+.ref-dock { position:relative; display:flex; justify-content:space-around; padding:19px 3% max(18px,env(safe-area-inset-bottom)); border-radius:34px 34px 0 0; background:linear-gradient(125deg,#101620,#070d16); border-top:1px solid #4b546050; }
+.ref-dock > button, .ref-dock > span { display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--ref-muted); width:25%; }
+.ref-dock small { font-size:11px; letter-spacing:.04em; }
+.ref-dock-handle { position:absolute; top:7px; left:46%; width:8%; height:4px; border-radius:4px; background:#3c4250; }
+.ref-architectural-stage { position:relative; display:flex; align-items:center; width:100%; gap:12px; padding:7% 4% 0 7%; margin:0 0 4%; }
+.ref-architectural-stage > img { width:66%; aspect-ratio:251 / 341; object-fit:cover; border-radius:6px; display:block; }
+.ref-architectural-stage .ref-details { text-align:left; }
+.ref-architectural-stage h1 { border-left:2px solid var(--ref-accent); padding-left:12px; margin-left:-14px; font-size:clamp(19px,5.9cqi,28px); }
+.ref-architectural-stage .ref-details p { margin-top:14px; }
+.ref-architectural-stage .ref-metadata { flex-direction:column; justify-content:flex-start; gap:6px; }
+.ref-silent-architecture .ref-timeline { margin-top:auto; }
+.ref-silent-architecture .ref-console { margin-top:20px; margin-bottom:10%; }
+.ref-silent-architecture .ref-play { background:#2055d1; border-color:#2c63e3; box-shadow:inset 0 1px #ffffff15; width:82px; height:82px; }
+.ref-silent-architecture .ref-header .ref-queue { border:0; background:none; }
+.ref-spectrum { display:flex; align-items:flex-end; justify-content:center; gap:3px; height:26px; margin:0 18% 12px; opacity:.85; }
+.ref-spectrum i { width:2px; background:#fff; border-radius:1px 1px 0 0; transition:height 90ms linear; }
+.ref-dock small { font-size:14px; letter-spacing:0; direction:rtl; }
+.ref-studio-cassette .ref-dock { background:linear-gradient(125deg,#222326,#111214); border-top-color:#454548; }
+.ref-studio-cassette .ref-dock-handle { background:#6d3532; }
+.ref-studio-cassette .ref-dock svg { color:#ba3733; }
+.ref-header .ref-back, .ref-header .ref-queue { border:0; background:none; border-radius:12px; }
+.ref-studio-cassette .ref-header .ref-back, .ref-studio-cassette .ref-header .ref-queue { border:0; background:none; box-shadow:none; border-radius:12px; }
+.ref-silent-architecture .ref-architectural-stage { justify-content:center; padding:7% 7% 0; gap:0; }
+.ref-silent-architecture .ref-architectural-stage > img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:12px; box-shadow:0 12px 30px #0005; }
+.ref-studio-cassette { --ref-accent:#ba3733; --ref-muted:#98999c; background:#141517 url('./reference-skins/black-leather.webp') repeat; border:1px solid #363739; box-shadow:inset 0 0 25px #0009; }
+.ref-studio-cassette .ref-header { border-bottom:1px solid #000; box-shadow:0 1px #ffffff0c; padding-block:5%; }
+.ref-studio-cassette .ref-header .ref-now { color:var(--ref-accent); }
+.ref-studio-cassette .ref-header .ref-back, .ref-studio-cassette .ref-header .ref-queue { border-radius:7px; border:1px solid #020303; background:linear-gradient(#222427,#111214); box-shadow:inset 0 1px #ffffff12,0 2px 4px #0008; }
+.ref-cassette-panel { position:relative; padding:8% 5% 6%; border-bottom:1px solid #020303; box-shadow:0 1px #ffffff0a; }
+.ref-cassette { position:relative; width:100%; box-shadow:0 3px 14px #000; border-radius:8px; overflow:hidden; }
+.ref-cassette > img:first-child { display:block; width:100%; height:auto; }
+.ritmo-reference .ref-hub { position:absolute; top:37.45%; width:11.11%; height:17.02%; border-radius:50%; animation:ref-reel 4s linear infinite paused; }
+.ref-hub-left { left:23.06%; }
+.ritmo-reference .ref-hub-right { left:64.44%; animation-direction:reverse; animation-duration:4.4s; }
+.ritmo-reference.ref-playing .ref-hub { animation-play-state:running; }
+.ref-screw { position:absolute; width:12px; height:12px; background:radial-gradient(#2c2d30,#050606 65%,#3c3d3e); border:1px solid #030404; border-radius:50%; box-shadow:0 1px #ffffff18; }
+.ref-screw::after { content:""; position:absolute; top:5px; left:2px; width:6px; height:1px; transform:rotate(-30deg); background:#030303; }
+.ref-screw-tl { top:12px; left:9px; }.ref-screw-tr { top:12px; right:9px; }
+.ref-screw-bl { bottom:10px; left:9px; }.ref-screw-br { bottom:10px; right:9px; }
+.ref-studio-cassette .ref-heading-row { margin-top:5%; }
+.ref-studio-cassette .ref-details h1 { color:var(--ref-accent); }
+.ref-studio-cassette .ref-details p { color:var(--ref-muted); }
+.ref-studio-cassette .ref-heart, .ref-studio-cassette .ref-more { border-radius:8px; color:var(--ref-accent) !important; background:linear-gradient(#242528,#101113) !important; border:1px solid #020303 !important; box-shadow:0 2px 4px #0009,inset 0 1px #ffffff0d; }
+.ref-studio-cassette .ref-more { color:#a3a4a5 !important; }
+.ref-studio-cassette .ref-times > :first-child { color:var(--ref-muted); }
+.ref-studio-cassette .ref-console { border:1px solid #030303; border-radius:12px 12px 0 0; padding:6% 5% 4%; margin:5% 2% 0; box-shadow:inset 0 1px #ffffff1a,0 0 0 2px #ffffff05; }
+.ref-studio-cassette .ref-transport { gap:5%; }
+.ref-studio-cassette .ref-transport > button, .ref-studio-cassette .ref-transport > span { flex:1; width:auto; height:65px; border-radius:6px; background:linear-gradient(#202124,#0d0e10); border:2px solid #030404; box-shadow:0 3px 5px #000a,inset 0 1px #ffffff12; }
+.ref-studio-cassette .ref-transport .ref-play { background:linear-gradient(#63221f,#431715); }
+.ref-deck-settings { display:flex; justify-content:space-between; align-items:center; margin-top:18px; }
+.ref-deck-settings .ref-toggle { flex-direction:column; display:flex; align-items:center; gap:8px; }
+.ref-toggle small, .ref-volume > span { font-size:11px; color:#a2a3a5; }
+.ref-switch { position:relative; width:48px; height:21px; background:#08090b; border-radius:20px; border:1px solid #000; box-shadow:0 1px #ffffff20,inset 0 2px 3px #000; }
+.ref-switch::after { content:""; position:absolute; left:3px; top:2px; width:16px; height:16px; border-radius:50%; background:#64221f; border:1px solid #230d0b; box-shadow:0 1px 2px #000; }
+.ref-switch.ref-on::after { left:27px; background:#bd3a34; }
+.ref-volume { display:flex; flex-direction:column; gap:10px; align-items:center; }
+.ref-volume-knob { position:relative; width:58px; height:58px; border-radius:50%; background:radial-gradient(circle at 40% 25%,#252629,#101113 65%); border:2px solid #030404; box-shadow:0 4px 7px #000b,inset 0 1px #ffffff15; }
+.ref-volume-knob > i { position:absolute; inset:5px; transform:rotate(var(--volume-angle)); }
+.ref-volume-knob > i::after { content:""; position:absolute; width:3px; height:10px; background:#a73530; left:calc(50% - 1.5px); top:0; border-radius:1px; }
+.ref-volume-knob input { position:absolute; inset:0; width:100%; height:100%; opacity:.01; cursor:ew-resize; touch-action:pan-y; margin:0; }
+.ref-volume-knob:focus-within { outline:2px solid var(--ref-accent); outline-offset:4px; }
+.ref-speaker { position:relative; margin-top:auto; min-height:70px; display:grid; place-items:center; border-top:1px solid #030303; background:radial-gradient(circle,#020303 2px,transparent 3px) 0 0/10px 10px; box-shadow:inset 0 3px 8px #000a; }
+.ref-speaker > span { font-size:14px; letter-spacing:.15em; color:#6f7073; background:#131416; padding:2px 6px; }
+.ref-tool-dialog { color:#f0f1f4; background:#101722; border:1px solid #ffffff20; border-radius:20px; padding:20px; width:calc(100% - 32px); max-width:390px; max-height:75dvh; overflow-y:auto; }
+.ref-tool-dialog::backdrop { background:#000a; backdrop-filter:blur(7px); }
+.ref-tool-dialog header { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; }
+.ref-tool-dialog h2 { font-size:18px; margin:0; }
+.ref-tool-dialog button { background:#ffffff0a; border:1px solid #ffffff15; border-radius:10px; color:inherit; min-height:44px; min-width:44px; padding:8px 12px; cursor:pointer; }
+.ref-tool-dialog button:focus-visible { outline:2px solid #5282ff; outline-offset:3px; }
+.ref-tool-dialog .ref-active, .ref-tool-dialog button[aria-pressed=true] { color:#70a0ff; border-color:#5282ff; }
+.ref-lyrics { display:flex; flex-direction:column; gap:10px; line-height:1.8; }
+.ref-lyrics p { color:#9298a5; }
+.ref-sound-tools input { display:block; width:100%; height:44px; accent-color:#205bea; }
+.ref-sound-tools > div { display:flex; flex-wrap:wrap; gap:8px; }
+.ref-feature-placeholder { font-size:16px; color:#a5afbf; line-height:1.9; }
+.ritmo-player.ritmo-player-reference { background:#050b14; padding:0; overflow:hidden; overscroll-behavior:none; touch-action:pan-y; }
+.ritmo-player-reference > .ritmo-player-shell { max-width:none; min-height:0; height:100%; gap:0; }
+.ritmo-player-reference .ref-live { width:100%; height:100%; min-height:0; aspect-ratio:auto; border-radius:0; padding-top:env(safe-area-inset-top,0px); padding-bottom:max(16px,env(safe-area-inset-bottom,0px)); }
+.ritmo-player-reference .ref-studio-cassette { border-top:0; border-bottom:0; }
+.ritmo-skin-choice .skin-studio-cassette .ritmo-skin-device,
+.ritmo-skin-choice .skin-midnight-orbit .ritmo-skin-device,
+.ritmo-skin-choice .skin-silent-architecture .ritmo-skin-device { width:100%; height:100%; aspect-ratio:auto; min-width:0; max-width:100%; }
+.ritmo-skin-choice .ritmo-reference { width:100%; height:100%; border-radius:6px; }
+.ritmo-skin-choice .ref-preview { pointer-events:none; }
+.ritmo-skin-choice .ref-header { padding:5%; }
+.ritmo-skin-choice .ref-header .ref-now { font-size:5cqi; gap:3px; margin-left:0; }
+.ritmo-skin-choice .ref-header > span, .ritmo-skin-choice .ref-header > div > span { width:14px; height:14px; border-radius:3px; }
+.ritmo-skin-choice .ref-header svg, .ritmo-skin-choice .ref-heading-row svg { width:10px; height:10px; }
+.ritmo-skin-choice .ref-now i { width:8px; height:2px; }
+.ritmo-skin-choice .ref-details h1 { font-size:6cqi; }.ritmo-skin-choice .ref-details p { font-size:4cqi; margin:2px 0; }
+.ritmo-skin-choice .ref-metadata, .ritmo-skin-choice .ref-times { display:none; }
+.ritmo-skin-choice .ref-heading-row { padding:0 5%; gap:3px; }
+.ritmo-skin-choice .ref-heart, .ritmo-skin-choice .ref-more { width:14px; height:14px; }
+.ritmo-skin-choice .ref-transport .ref-play { width:26%; height:auto; aspect-ratio:1; border-width:1px; box-shadow:none; }
+.ritmo-skin-choice .ref-transport svg { width:9px; height:9px; }
+.ritmo-skin-choice .ref-console { padding-top:3px; }
+.ritmo-skin-choice .ref-studio-cassette .ref-console { padding:5%; }
+.ritmo-skin-choice .ref-studio-cassette .ref-transport > span { height:20px; aspect-ratio:auto; border-width:1px; }
+.ritmo-skin-choice .ref-deck-settings { margin-top:5px; }
+.ritmo-skin-choice .ref-volume { gap:2px; }
+.ritmo-skin-choice .ref-volume-knob { width:18px; height:18px; border-width:1px; }
+.ritmo-skin-choice .ref-volume-knob > i::after { height:4px; width:1px; }
+.ritmo-skin-choice .ref-toggle small, .ritmo-skin-choice .ref-volume > span { font-size:4cqi; }
+.ritmo-skin-choice .ref-switch { width:16px; height:7px; }
+.ritmo-skin-choice .ref-switch::after { width:4px; height:4px; left:1px; top:0; }
+.ritmo-skin-choice .ref-toggle { gap:2px; }
+.ritmo-skin-choice .ref-speaker { min-height:16px; background-size:4px 4px; }
+.ritmo-skin-choice .ref-speaker > span { font-size:5cqi; }
+.ritmo-skin-choice .ref-spectrum { height:5px; margin-bottom:2px; gap:1px; }
+.ritmo-skin-choice .ref-spectrum i { height:2px !important; width:1px; }
+.ritmo-skin-choice .ref-dock { padding:8px 3% 4px; border-radius:10px 10px 0 0; }
+.ritmo-skin-choice .ref-dock svg { width:9px; height:9px; }.ritmo-skin-choice .ref-dock small { display:none; }
+.ritmo-skin-choice .ref-dock-handle { top:3px; height:2px; }
+.ritmo-skin-choice .ref-static-seek { margin:6px 0; height:1px; }
+.ritmo-skin-choice .ref-screw { width:4px; height:4px; }.ritmo-skin-choice .ref-screw::after { display:none; }
+.ritmo-skin-choice .ref-screw-tl, .ritmo-skin-choice .ref-screw-tr { top:3px; }
+.ritmo-skin-choice .ref-screw-bl, .ritmo-skin-choice .ref-screw-br { bottom:3px; }
+/* Thumbnails show the signature surface, not illegible miniature controls. */
+.ritmo-skin-choice .ritmo-reference .ref-header,
+.ritmo-skin-choice .ritmo-reference .ref-heading-row,
+.ritmo-skin-choice .ritmo-reference .ref-console,
+.ritmo-skin-choice .ritmo-reference .ref-dock,
+.ritmo-skin-choice .ritmo-reference .ref-speaker,
+.ritmo-skin-choice .ritmo-reference .ref-timeline,
+.ritmo-skin-choice .ritmo-reference .ref-spectrum,
+.ritmo-skin-choice .ritmo-reference .ref-details,
+.ritmo-skin-choice .ritmo-reference .ref-screw { display:none; }
+.ritmo-skin-choice .ritmo-reference .ref-main { height:100%; }
+.ritmo-skin-choice .ritmo-reference .ref-cassette-panel { padding:0; height:100%; border:0; display:grid; place-items:center; }
+.ritmo-skin-choice .ritmo-reference .ref-cassette { width:100%; }
+.ritmo-skin-choice .ritmo-reference .ref-planet-stage { height:100%; aspect-ratio:auto; }
+.ritmo-skin-choice .ritmo-reference .ref-planet-stage img { object-position:center 38%; }
+.ritmo-skin-choice .ritmo-reference .ref-architectural-stage { height:100%; padding:0; margin:0; }
+.ritmo-skin-choice .ritmo-reference .ref-architectural-stage > img { width:100%; height:100%; object-fit:cover; border-radius:0; }
+.skin-compact .ritmo-reference { aspect-ratio:1; border-radius:18%; }
+.skin-compact .ritmo-reference .ref-header, .skin-compact .ritmo-reference .ref-heading-row,
+.skin-compact .ritmo-reference .ref-console, .skin-compact .ritmo-reference .ref-dock,
+.skin-compact .ritmo-reference .ref-speaker, .skin-compact .ritmo-reference .ref-timeline,
+.skin-compact .ritmo-reference .ref-spectrum, .skin-compact .ritmo-reference .ref-details,
+.skin-compact .ritmo-reference .ref-screw { display:none; }
+.skin-compact .ritmo-reference .ref-main { height:100%; }
+.skin-compact .ref-planet-stage { height:100%; aspect-ratio:1; }
+.skin-compact .ref-cassette-panel { height:100%; padding:16% 2% 0; }
+.skin-compact .ref-architectural-stage { height:100%; padding:0; margin:0; }
+.skin-compact .ref-architectural-stage > img { width:100%; height:100%; object-fit:cover; border-radius:0; }
+@keyframes ref-reel { to { transform:rotate(360deg); } }
+@media (max-height:700px) {
+  .ref-live .ref-header { padding-block:10px; }
+  .ref-live .ref-planet-stage { max-height:40dvh; }
+  .ref-live .ref-architectural-stage { padding-top:3%; }
+  .ref-live.ref-silent-architecture .ref-architectural-stage > img { max-height:40dvh; width:auto; max-width:100%; aspect-ratio:1; }
+  .ref-live .ref-console { padding-top:6px; margin-bottom:12px; }
+  .ref-live .ref-cassette-panel { padding-top:6%; padding-bottom:4%; }
+  .ref-live .ref-cassette { max-width:310px; margin:auto; }
+}
+@media (prefers-reduced-motion:reduce) { .ritmo-reference .ref-hub { animation:none; } }
+/* Shared Silent Orbit toolbar geometry, with each skin's existing palette. */
+.ritmo-reference .ref-header .ref-back,
+.ritmo-reference .ref-header .ref-queue { border:0; background:none; box-shadow:none; border-radius:12px; }
+.ref-live-cover { width:100%; aspect-ratio:1; border-radius:12px; overflow:hidden; box-shadow:0 12px 30px #0005; background:#111b2a; }
+.ref-live-cover > *, .ref-live-cover img { width:100%; height:100%; border-radius:0; }
+.ref-live-cover img { display:block; object-fit:cover; }
+.ref-moon-vinyl { position:absolute; left:14.5%; top:6.5%; width:71.5%; aspect-ratio:1; border-radius:50%; padding:3px; border:1px solid #a4d5ff; background:#287cff; box-shadow:0 0 12px #428aff,0 0 28px #2867e877; z-index:1; overflow:hidden; }
+.ref-moon-record { position:relative; width:100%; height:100%; border-radius:50%; background:repeating-radial-gradient(circle,#0b1424 0 2px,#1a273a 2px 3px,#070e18 3px 5px); box-shadow:inset 0 0 24px #000; animation:ref-moon-spin 24s linear infinite paused; }
+.ref-moon-record::before { content:""; position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 20deg,transparent 10%,#95bbeb18 18%,transparent 27%,transparent 60%,#95bbeb15 70%,transparent 78%); }
+.ref-moon-label { position:absolute; inset:31%; border-radius:50%; overflow:hidden; background:#14253e; box-shadow:0 0 0 2px #020915,0 0 0 4px #447ac14d; }
+.ref-moon-label > *, .ref-moon-label img { width:100%; height:100%; border-radius:0; }
+.ref-moon-label img { display:block; object-fit:cover; }
+.ref-moon-spindle { position:absolute; left:calc(50% - 4px); top:calc(50% - 4px); width:8px; height:8px; border-radius:50%; background:#030812; border:1px solid #8aa3c4; }
+.ref-playing .ref-moon-record { animation-play-state:running; }
+@keyframes ref-moon-spin { to { transform:rotate(360deg); } }
+.ritmo-skin-choice .ref-live-cover, .skin-compact .ref-live-cover { height:100%; aspect-ratio:auto; border-radius:0; }
+@media(max-height:700px) { .ref-live.ref-silent-architecture .ref-live-cover { width:min(100%,40dvh); } }
+@media(prefers-reduced-motion:reduce) { .ritmo-reference .ref-moon-record { animation:none; } }
+
+/* Midnight Orbit: no scenic plate behind the disc; reserve the bottom dock as a real flex row. */
+.ref-midnight-orbit.ref-live { padding-bottom:0; }
+.ref-midnight-orbit .ref-main { flex:1 1 auto; min-height:0; overflow:hidden; }
+.ref-midnight-orbit .ref-orbit-stage { flex:1 1 0; display:grid; place-items:center; width:100%; min-height:0; max-height:38dvh; aspect-ratio:auto; margin:0; background:none; }
+.ref-midnight-orbit .ref-orbit-stage::after { content:none; }
+.ref-midnight-orbit .ref-moon-vinyl { position:relative; inset:auto; width:min(82vw,38dvh,360px); max-width:100%; flex:none; }
+.ref-midnight-orbit .ref-moon-record { box-shadow:inset 0 0 14px #000b; }
+.ref-midnight-orbit .ref-moon-label { inset:25%; background:#14253e; box-shadow:0 0 0 2px #020915,0 0 0 4px #447ac14d; }
+.ref-midnight-orbit .ref-spectrum { flex:0 0 20px; height:20px; margin:0 18% 5px; }
+.ref-midnight-orbit .ref-console { flex:0 0 auto; margin:2px 5% 6px; padding-top:4px; }
+.ref-midnight-orbit .ref-timeline { flex:0 0 auto; margin-top:4px; }
+.ref-midnight-orbit .skin-menu-dock { flex:0 0 auto; position:relative; bottom:auto; left:auto; right:auto; }
+@media(max-height:700px) {
+  .ref-midnight-orbit .ref-orbit-stage { max-height:25dvh; }
+  .ref-midnight-orbit .ref-heading-row { padding-inline:4%; gap:6px; }
+  .ref-midnight-orbit .ref-details h1 { font-size:clamp(15px,4.3cqi,20px); }
+  .ref-midnight-orbit .ref-details p { margin:2px 0 4px; font-size:13px; }
+  .ref-midnight-orbit .ref-metadata { gap:4px; font-size:12px; }
+  .ref-midnight-orbit .ref-console { margin-bottom:3px; }
+  .ref-midnight-orbit .ref-transport .ref-play { width:66px; height:66px; }
+  .ref-midnight-orbit .ref-spectrum { flex-basis:12px; height:12px; margin-bottom:2px; }
+}
+@media(prefers-reduced-motion:reduce) { .ref-midnight-orbit .ref-moon-record { animation:none; } }
+
+@media(max-height:700px) { .ref-midnight-orbit .ref-moon-vinyl { width:min(72vw,24dvh,280px); } }
+@media(max-height:560px) { .ref-midnight-orbit .ref-moon-vinyl { width:min(66vw,19dvh,210px); } .ref-midnight-orbit .ref-orbit-stage { max-height:19dvh; } }
+
+.ref-midnight-orbit .ref-heading-row,.ref-midnight-orbit .ref-timeline,.ref-midnight-orbit .ref-console,.ref-midnight-orbit .ref-spectrum { flex-shrink:0; }
+.ref-midnight-orbit .skin-menu-dock { flex-shrink:0; width:100%; }
+
+/* Orbit's live card itself remains responsible for its title row. */
+.ritmo-featured-orbit { height:100%; min-height:0; justify-content:center; gap:0; }
+.ritmo-featured-orbit > .ritmo-reference { flex:1 1 auto; height:100%; min-height:0; }
+.ritmo-featured-orbit > .ritmo-featured-track-title { flex:0 0 auto; padding:2px 12px 4px; }
+.ritmo-featured-orbit > .ritmo-featured-track-title h1 { font-size:clamp(15px,4.4vw,20px); line-height:1.35; }
+.ritmo-featured-orbit > .ritmo-featured-track-title h1::after { display:none; }
+.ritmo-featured-orbit > .ritmo-featured-track-title p { font-size:12px; }
+
+/* Midnight Orbit title stays in its dedicated row above the controls. */
+.ref-midnight-orbit .ref-heading-row { flex:0 0 auto; width:100%; margin:8px 0 0; padding:2px 5% 4px; }
+.ref-midnight-orbit .ref-details { text-align:center; }
+.ref-midnight-orbit .ref-details h1 { max-height:2.7em; overflow:hidden; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow-wrap:anywhere; color:transparent; background:linear-gradient(105deg,#c5cbd3 0%,#eef1f5 34%,#fff 46%,#bbc3cd 52%,#f7f8fa 58%,#cad1da 68%,#e7ebef 100%); background-size:240% 100%; background-position:190% 0; background-clip:text; -webkit-background-clip:text; }
+.ref-midnight-orbit .ref-details p { color:#c2cbd7; }
+@media(prefers-reduced-motion:no-preference) { .ref-midnight-orbit .ref-details h1 { animation:ritmo-polished-steel 7s ease-in-out infinite; } }
+@media(prefers-reduced-motion:reduce) { .ref-midnight-orbit .ref-details h1 { color:#e7eaee; background:none; animation:none; } }

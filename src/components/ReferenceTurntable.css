@@ -1,0 +1,82 @@
+/* Source photo:1374x1145. Spindle:(625,465). Square plane:864, center:(625,465).
+   x=625+432u/(1-.107325v), y=(465+240.21v)/(1-.107325v).
+   Inner square rotates; projection and environmental lighting remain fixed.
+   Body alpha aperture contains no fixed vinyl, label or spindle. */
+.ritmo-skin-stage.skin-vinyl .ritmo-skin-device {
+  width:min(100%,440px); max-width:440px; aspect-ratio:1374 / 1145;
+  display:block;
+}
+.reference-turntable {
+  position:relative; width:100%; aspect-ratio:1374 / 1145;
+  container-type:inline-size; isolation:isolate;
+  filter:drop-shadow(0 14px 22px rgb(4 8 14 / .22));
+}
+.reference-turntable-scene {
+  position:absolute; inset:0; isolation:isolate; overflow:visible;
+  /* Camera perspective is already in the photograph; never pitch it twice. */
+}
+/* Hide the small baked-in corner wordmark without touching the turntable layers. */
+.reference-turntable-scene::after {
+  content:"";
+  position:absolute; z-index:2; pointer-events:none;
+  right:2.5%; bottom:4.5%; width:13%; height:7%;
+  border-radius:30%;
+  background:rgb(18 13 12 / .72);
+  filter:blur(3px);
+}
+.reference-turntable-scene > .reference-turntable-body,
+.reference-turntable-scene > .reference-turntable-hardware,
+.reference-turntable-scene > .reference-turntable-arm {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  pointer-events:none; user-select:none;
+}
+.reference-turntable-body { z-index:0; }
+.reference-turntable-hardware { z-index:3; }
+.reference-record-plane {
+  position:absolute; left:14.04658%; top:2.88210%; width:62.88210%;
+  aspect-ratio:1; transform-origin:50% 50%;
+  /* CSS perspective acts around this plane's translated center. Its cosine
+     must include the 465*c translation term from the source homography. */
+  transform:perspective(217.05861cqw) rotateX(47.811465deg);
+  z-index:1; pointer-events:none;
+}
+.reference-record-spin {
+  position:absolute; inset:0; display:block; width:100%; height:100%; border-radius:50%;
+  user-select:none; pointer-events:none; transform-origin:50% 50%;
+  animation:reference-vinyl-rotation 1.8s linear infinite;
+  animation-play-state:paused; will-change:transform;
+}
+.skin-vinyl.is-playing .reference-record-spin { animation-play-state:running; }
+.reference-record-plane .reference-record-texture,
+.reference-record-plane .reference-record-light {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  pointer-events:none; user-select:none;
+}
+.reference-record-artwork {
+  position:absolute; left:50%; top:50%; width:29.5%; height:29.5%;
+  transform:translate(-50%,-50%); border-radius:50%; overflow:hidden;
+  box-sizing:border-box; background:#2f271f; z-index:1;
+  border:1px solid rgb(185 138 54 / .42);
+  box-shadow:0 0 0 1px rgb(10 8 6 / .65),inset 0 1px 2px rgb(255 255 255 / .18);
+}
+.reference-record-artwork > img {
+  position:absolute; inset:0; display:block; width:100%; height:100%;
+  max-width:none; object-fit:cover; border-radius:50%; margin:0; padding:0;
+}
+.reference-turntable-arm {
+  z-index:4; transform-origin:81.87773% 25.58952%;
+  /* Actual shaft connection:(1125,293). Negative rotation swings outward. */
+  transform:rotate(-42deg) translateY(-5px);
+}
+@keyframes reference-vinyl-rotation {
+  from { transform:rotate(0deg); } to { transform:rotate(360deg); }
+}
+.ritmo-skin-choice .skin-vinyl .ritmo-skin-device {
+  width:auto; height:100%; max-height:100%; max-width:100%; aspect-ratio:1374 / 1145;
+}
+.ritmo-mini-skin .skin-vinyl .ritmo-skin-device {
+  width:40px; height:auto; max-width:40px; aspect-ratio:1374 / 1145;
+}
+@media(prefers-reduced-motion:reduce) {
+  .reference-record-plane .reference-record-spin { animation:none; will-change:auto; }
+}

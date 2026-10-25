@@ -1,0 +1,20 @@
+/* Only the replacement cassette surface. No app, control or shared stage rules. */
+.skin-cassette .ritmo-walkman {
+  position:relative;
+  width:100%;
+  aspect-ratio:480 / 330;
+  isolation:isolate;
+  contain:layout style;
+  filter:drop-shadow(0 12px 10px rgb(12 0 2 / .42));
+}
+.skin-cassette .ritmo-walkman-scene {
+  display:block;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+.ritmo-mini-skin .skin-cassette .ritmo-walkman { filter:none; }
+@media(prefers-reduced-motion:reduce) {
+  .skin-cassette .ritmo-walkman,
+  .skin-cassette .ritmo-walkman * { animation:none; transition:none; }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "ریتمو | Ritmo",
+  "description": "پخش‌کننده موسیقی و ویدئو با طراحی مدرن، اکولایزر ۱۰ کاناله، ویژوالایزر واکنش‌گرا به صدای واقعی، جست‌وجوی آنلاین متن ترانه، مدیریت فهرست پخش و پشتیبان‌گیری از تنظیمات.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

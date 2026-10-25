@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+
+// Release credentials must live outside the repository: in the user's
+// ~/.gradle/gradle.properties or in the process environment.
+def releaseSigningValues = [
+    storeFile: providers.gradleProperty('ritmoStoreFile')
+        .orElse(providers.gradleProperty('RITMO_RELEASE_STORE_FILE'))
+        .orElse(providers.environmentVariable('RITMO_RELEASE_STORE_FILE')).orNull,
+    storePassword: providers.gradleProperty('ritmoStorePassword')
+        .orElse(providers.gradleProperty('RITMO_RELEASE_STORE_PASSWORD'))
+        .orElse(providers.environmentVariable('RITMO_RELEASE_STORE_PASSWORD')).orNull,
+    keyAlias: providers.gradleProperty('ritmoKeyAlias')
+        .orElse(providers.gradleProperty('RITMO_RELEASE_KEY_ALIAS'))
+        .orElse(providers.environmentVariable('RITMO_RELEASE_KEY_ALIAS')).orNull,
+    keyPassword: providers.gradleProperty('ritmoKeyPassword')
+        .orElse(providers.gradleProperty('RITMO_RELEASE_KEY_PASSWORD'))
+        .orElse(providers.environmentVariable('RITMO_RELEASE_KEY_PASSWORD')).orNull,
+]
+def releaseSigningConfigured = releaseSigningValues.values().every {
+    it != null && !it.trim().isEmpty()
+}
+
+android {
+    namespace = "com.adelapp.larkplayer"
+    compileSdk = rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.adelapp.larkplayer"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 10106
+        versionName "1.1.6"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        release {
+            if (releaseSigningConfigured) {
+                storeFile file(releaseSigningValues.storeFile)
+                storePassword releaseSigningValues.storePassword
+                keyAlias releaseSigningValues.keyAlias
+                keyPassword releaseSigningValues.keyPassword
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    def releasePackagingRequested = taskGraph.allTasks.any { task ->
+        task.project == project && task.name in [
+            'assembleRelease', 'bundleRelease', 'packageRelease', 'signReleaseBundle'
+        ]
+    }
+    if (releasePackagingRequested && !releaseSigningConfigured) {
+        throw new GradleException(
+            'Release signing is not configured. Set ritmoStoreFile, ritmoStorePassword, ' +
+            'ritmoKeyAlias, and ritmoKeyPassword (or their RITMO_RELEASE_* Gradle property ' +
+            'aliases) in user-level Gradle properties. The RITMO_RELEASE_* names are also ' +
+            'supported as environment variables.'
+        )
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+    implementation "androidx.media3:media3-exoplayer:1.5.1"
+    implementation "androidx.media3:media3-session:1.5.1"
+    implementation "androidx.media3:media3-ui:1.5.1"
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

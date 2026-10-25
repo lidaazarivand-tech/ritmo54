@@ -1,0 +1,124 @@
+/* All rules are scoped to playlist detail. Existing player and library stay untouched. */
+.ritmo-playlist-detail:has(.ritmo-playlist-sleeve) { padding:0 0 calc(32px + env(safe-area-inset-bottom, 0px)); background:var(--ritmo-background, #0a0c13); }
+.ritmo-playlist-sleeve { --playlist-gold:#fbbf24; --playlist-ink:#15130d; --ritmo-muted:#b7c2cf; color:var(--ritmo-text, #f1f5f9); }
+.ritmo-playlist-detail-content.ritmo-playlist-sleeve { max-width:680px; padding:0; }
+.ritmo-playlist-sleeve button, .ritmo-playlist-sleeve summary { -webkit-tap-highlight-color:transparent; cursor:pointer; }
+.ritmo-playlist-sleeve button:disabled { opacity:.35; cursor:not-allowed; }
+.ritmo-playlist-sleeve button:focus-visible, .ritmo-playlist-sleeve summary:focus-visible { outline:2px solid var(--playlist-gold); outline-offset:3px; }
+.ritmo-playlist-hero { position:relative; min-height:350px; height:clamp(350px, 56svh, 520px); overflow:hidden; background:var(--ritmo-surface, #171923); }
+.ritmo-playlist-hero-art, .ritmo-playlist-hero-shade { position:absolute; inset:0; pointer-events:none; }
+.ritmo-playlist-sleeve .ritmo-playlist-cover { display:block; width:100%; height:100%; object-fit:cover; object-position:center 36%; border-radius:0; }
+.ritmo-playlist-hero-shade { background:linear-gradient(180deg, #0008 0%, #0000 32%, #0004 55%, var(--ritmo-background, #0a0c13) 100%); }
+.ritmo-playlist-sleeve-toolbar { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:calc(12px + env(safe-area-inset-top, 0px)) 18px 0; color:#fff; }
+.ritmo-playlist-sleeve-toolbar > span { font-size:14px; font-weight:600; text-shadow:0 1px 8px #0009; }
+.ritmo-playlist-glass-button { display:grid; place-items:center; width:44px; min-height:44px; border-radius:50%; background:#07091050; backdrop-filter:blur(12px); list-style:none; }
+.ritmo-playlist-glass-button::-webkit-details-marker { display:none; }
+.ritmo-playlist-sleeve-menu { position:relative; }
+.ritmo-playlist-sleeve-menu .ritmo-playlist-menu { top:52px; width:220px; background:var(--ritmo-elevated, #171923); border-color:var(--ritmo-border, #ffffff1a); }
+.ritmo-playlist-sleeve-menu .ritmo-playlist-menu button { font-size:14px; min-height:46px; }
+.ritmo-playlist-sleeve-menu .ritmo-playlist-menu .ritmo-playlist-delete { color:#fda4af; }
+.ritmo-playlist-hero-title { position:absolute; inset-inline:24px; bottom:18px; }
+.ritmo-playlist-eyebrow { display:flex; align-items:center; gap:7px; font-size:14px; color:var(--ritmo-muted, #94a3b8); margin-bottom:10px; }
+.ritmo-playlist-hero-title h1 { font-size:clamp(30px, 7.4vw, 44px); font-weight:800; line-height:1.45; letter-spacing:-.7px; margin:0 0 10px; overflow-wrap:anywhere; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.ritmo-playlist-hero-title p { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:14px; color:var(--ritmo-muted, #94a3b8); margin:0; }
+.ritmo-playlist-listening { display:flex; align-items:center; gap:10px; padding:6px 24px 28px; }
+.ritmo-playlist-primary { display:flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 23px; border-radius:28px; font-size:16px; font-weight:750; color:var(--playlist-ink); background:var(--playlist-gold); box-shadow:0 6px 24px #fbbf2418; white-space:nowrap; flex-shrink:0; }
+.ritmo-playlist-shuffle { display:grid; place-items:center; width:48px; min-height:48px; border:1px solid var(--ritmo-border, #ffffff1a); border-radius:50%; flex-shrink:0; }
+.ritmo-playlist-shuffle.is-active { color:var(--playlist-gold); border-color:#fbbf2470; background:linear-gradient(145deg,#fbbf2420,#fbbf2408); box-shadow:inset 0 1px #ffffff18,0 4px 12px #0004,0 0 0 2px #fbbf2410; }
+.ritmo-playlist-add { display:flex; align-items:center; justify-content:center; gap:5px; min-height:44px; margin-inline-start:auto; font-size:14px; color:var(--ritmo-muted, #94a3b8); }
+.ritmo-playlist-track-heading { display:flex; align-items:center; justify-content:space-between; margin:0 24px 10px; gap:12px; }
+.ritmo-playlist-track-heading h2 { font-size:16px; font-weight:700; margin:0; }
+.ritmo-playlist-track-heading > span, .ritmo-playlist-heading-actions > span { color:var(--ritmo-muted, #94a3b8); font-size:14px; }
+.ritmo-playlist-track-heading button { display:flex; gap:6px; align-items:center; min-height:44px; font-size:14px; color:var(--playlist-gold); }
+.ritmo-playlist-heading-actions { display:flex; align-items:center; justify-content:flex-end; gap:8px; min-width:0; }
+.ritmo-playlist-track-heading .ritmo-playlist-mode { min-height:38px; padding:0 10px; border:1px solid var(--ritmo-border,#ffffff1a); border-radius:12px; color:var(--ritmo-muted,#94a3b8); background:linear-gradient(145deg,#ffffff0b,#0002); box-shadow:inset 0 1px #ffffff0b,0 3px 8px #0003; }
+.ritmo-playlist-track-heading .ritmo-playlist-mode.is-active { color:var(--playlist-gold); border-color:#fbbf2460; background:#fbbf2415; }
+.ritmo-playlist-mode span { white-space:nowrap; }
+.ritmo-playlist-track-list { padding:0 12px; }
+.ritmo-playlist-track { display:flex; align-items:center; flex-wrap:wrap; gap:4px; min-height:86px; padding:5px 8px; border-radius:14px; }
+.ritmo-playlist-track.is-current { background:linear-gradient(270deg, #fbbf2410, #fbbf2403); }
+.ritmo-playlist-track-main { flex:1; min-width:0; display:flex; align-items:center; gap:13px; text-align:start; padding:0; }
+.ritmo-playlist-track-main { touch-action:pan-y; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
+.ritmo-playlist-track-main img { pointer-events:none; }
+.ritmo-playlist-track.is-dragging { opacity:.7; background:var(--ritmo-surface); outline:1px solid var(--playlist-gold); transform:scale(.98); }
+.ritmo-playlist-track.is-drop-target { box-shadow:0 -3px 0 var(--playlist-gold); }
+.ritmo-playlist-track.is-drop-after { box-shadow:0 3px 0 var(--playlist-gold); }
+.ritmo-playlist-grip { color:var(--ritmo-muted); opacity:.6; pointer-events:none; }
+.ritmo-playlist-drag-handle { display:grid; place-items:center; flex:0 0 36px; width:36px; min-height:44px; padding:0; color:var(--ritmo-muted); opacity:.75; font-size:22px; line-height:1; cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none; transition:color 140ms ease, transform 140ms ease; }
+.ritmo-playlist-drag-handle:active { color:var(--playlist-gold); cursor:grabbing; transform:scale(1.06); }
+.ritmo-playlist-drag-hint { margin:0 24px 12px; color:var(--ritmo-muted); font-size:14px; }
+.ritmo-playlist-track-remove { width:36px; min-height:44px; color:var(--ritmo-muted); display:grid; place-items:center; }
+.ritmo-playlist-track-art { width:62px; height:62px; flex-shrink:0; overflow:hidden; border-radius:12px; }
+.ritmo-playlist-track-art { box-shadow:0 3px 9px rgb(0 0 0 / 20%), 2px 0 7px rgb(0 0 0 / 10%), -2px 0 7px rgb(0 0 0 / 10%); }
+.ritmo-playlist-sleeve .ritmo-playlist-thumb { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+.ritmo-playlist-track-copy { flex:1; min-width:0; display:grid; gap:6px; }
+.ritmo-playlist-track-copy b, .ritmo-playlist-track-copy > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:start; }
+.ritmo-playlist-track-copy b { font-size:16px; font-weight:650; line-height:1.5; }
+.ritmo-playlist-track-copy > span { color:var(--ritmo-muted, #94a3b8); font-size:14px; line-height:1.5; }
+.ritmo-playlist-track.is-current .ritmo-playlist-track-copy b { color:var(--playlist-gold); }
+.ritmo-playlist-track-more { display:grid; place-items:center; width:44px; min-height:48px; color:var(--ritmo-muted, #94a3b8); }
+.ritmo-playlist-now { display:flex; align-items:center; justify-content:center; gap:3px; width:25px; height:24px; flex-shrink:0; color:var(--playlist-gold); }
+.ritmo-playlist-now i { display:block; height:6px; width:3px; border-radius:3px; background:currentColor; transform-origin:center; }
+.ritmo-playlist-now.is-playing i { animation:ritmo-playlist-meter 850ms ease-in-out infinite alternate; }
+.ritmo-playlist-now.is-playing i:nth-child(2) { animation-delay:-450ms; }
+.ritmo-playlist-now.is-playing i:nth-child(3) { animation-delay:-200ms; }
+.ritmo-playlist-now.is-playing i:nth-child(4) { animation-delay:-650ms; }
+.ritmo-playlist-track-edit { display:flex; justify-content:flex-end; gap:6px; width:100%; padding-top:4px; }
+.ritmo-playlist-track-edit button { display:grid; place-items:center; width:44px; height:44px; border-radius:10px; background:var(--ritmo-surface, #171923); }
+.ritmo-playlist-track-edit button:last-child { color:#fda4af; }
+.ritmo-playlist-empty { display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; padding:48px 24px; color:var(--ritmo-muted, #94a3b8); }
+.ritmo-playlist-empty h2 { font-size:18px; line-height:1.7; margin:0; color:var(--ritmo-text, #f1f5f9); }
+.ritmo-playlist-empty p { font-size:14px; margin:0; }
+.ritmo-playlist-empty button { display:flex; gap:7px; align-items:center; min-height:44px; color:var(--playlist-gold); font-size:14px; }
+@keyframes ritmo-playlist-meter { from { transform:scaleY(.65); } to { transform:scaleY(2.8); } }
+@media (max-width:360px) {
+  .ritmo-playlist-listening { padding-inline:16px; gap:8px; }
+  .ritmo-playlist-primary { padding-inline:16px; }
+  .ritmo-playlist-add { gap:3px; }
+  .ritmo-playlist-add span { display:none; }
+  .ritmo-playlist-add { width:44px; }
+  .ritmo-playlist-hero-title { inset-inline:20px; }
+  .ritmo-playlist-track-art { width:54px; height:54px; }
+  .ritmo-playlist-track-main { gap:8px; }
+  .ritmo-playlist-heading-actions { gap:4px; }
+  .ritmo-playlist-track-heading .ritmo-playlist-mode { padding-inline:7px; }
+  .ritmo-playlist-track-heading .ritmo-playlist-mode span { font-size:12px; }
+}
+@media (prefers-reduced-motion:reduce) { .ritmo-playlist-now.is-playing i { animation:none; height:12px; } }
+
+/* Collection uses the existing route, storage and actions, not another playlist system. */
+.ritmo-playlist-collection { min-height:calc(100dvh - 190px); padding-bottom:32px; }
+.ritmo-playlist-collection-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px; }
+.ritmo-playlist-collection-heading h1 { margin:0; font-size:22px; font-weight:700; }
+.ritmo-playlist-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:24px 18px; }
+.ritmo-playlist-card { min-width:0; display:flex; flex-direction:column; gap:9px; text-align:start; padding:0; }
+.ritmo-playlist-card b { max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:16px; }
+.ritmo-playlist-card span { font-size:14px; color:var(--ritmo-muted); }
+.ritmo-playlist-card-cover { width:100%; aspect-ratio:1; object-fit:cover; border-radius:8px; box-shadow:0 5px 14px rgb(0 0 0 / 20%), 3px 0 10px rgb(0 0 0 / 10%), -3px 0 10px rgb(0 0 0 / 10%); }
+
+/* Manual ordering lift and insertion cues. FLIP row movement is compositor-only. */
+.ritmo-playlist-track { transition:background-color 180ms ease,box-shadow 180ms ease,transform 180ms ease; }
+.ritmo-playlist-track.is-dragging { position:relative; z-index:3; opacity:.96; transform:scale(1.025) translateY(-2px); box-shadow:0 14px 30px #0009,inset 0 1px #ffffff22; }
+.ritmo-playlist-track.is-drop-target { box-shadow:inset 0 3px 0 var(--playlist-gold),0 0 0 1px #fbbf2430; }
+.ritmo-playlist-track.is-drop-after { box-shadow:inset 0 -3px 0 var(--playlist-gold),0 0 0 1px #fbbf2430; }
+.ritmo-playlist-drag-handle { touch-action:none; user-select:none; -webkit-user-select:none; }
+@media(prefers-reduced-motion:reduce) { .ritmo-playlist-track { transition:none; } }
+.ritmo-playlist-track.is-dragging { z-index:4; transition:box-shadow 140ms ease,background-color 140ms ease; will-change:transform; }
+.ritmo-playlist-track.is-reorder-shift { position:relative; z-index:1; transition:transform 150ms cubic-bezier(.2,.75,.25,1); will-change:transform; }
+.ritmo-playlist-track.is-drop-target { box-shadow:inset 0 3px 0 var(--playlist-gold),0 0 0 1px #fbbf2430; }
+@media(prefers-reduced-motion:reduce) { .ritmo-playlist-track.is-reorder-shift { transition:none; } }
+
+/* Compact sleeve geometry: more tracks above the fold, with depth kept local. */
+.ritmo-playlist-hero { min-height:280px; height:clamp(280px, 42svh, 390px); }
+.ritmo-playlist-hero-title { inset-inline:20px; bottom:16px; }
+.ritmo-playlist-hero-title h1 { font-size:clamp(26px, 6.2vw, 38px); line-height:1.35; }
+.ritmo-playlist-listening { padding:4px 20px 20px; }
+.ritmo-playlist-primary { min-height:48px; box-shadow:0 5px 14px #fbbf2420,inset 0 1px #fff7; }
+.ritmo-playlist-shuffle { min-height:44px; width:44px; box-shadow:inset 0 1px #ffffff12,0 4px 12px #0004; }
+.ritmo-playlist-track { min-height:76px; box-shadow:inset 0 1px #ffffff06; }
+.ritmo-playlist-track + .ritmo-playlist-track { margin-top:2px; }
+.ritmo-playlist-track-art { width:56px; height:56px; }
+@media (max-width:360px) {
+  .ritmo-playlist-hero { min-height:270px; height:clamp(270px, 40svh, 340px); }
+  .ritmo-playlist-listening { padding-inline:16px; }
+}
